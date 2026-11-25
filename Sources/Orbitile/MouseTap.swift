@@ -25,7 +25,10 @@ final class MouseTap {
     private var swallowMiddleUp = false
     private var swallowLeftUp = false
 
+    var isRunning: Bool { tap != nil }
+
     func start() -> Bool {
+        if isRunning { return true }
         let cid = CGSMainConnectionID()
         _ = CGSSetConnectionProperty(cid, cid, "SetsCursorInBackground" as CFString, kCFBooleanTrue)
         let types: [CGEventType] = [.otherMouseDown, .otherMouseUp, .otherMouseDragged, .mouseMoved, .leftMouseDown, .leftMouseUp, .leftMouseDragged, .keyDown]

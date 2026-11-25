@@ -47,9 +47,9 @@ Hoje usa o símbolo `square.grid.2x2` ([main.swift](Sources/Orbitile/main.swift)
 
 Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser relançado.
 
-- [ ] Detectar a permissão ausente e mostrar um aviso na menu bar com atalho para Privacy & Security → Accessibility.
-- [ ] Verificar `AXIsProcessTrusted()` periodicamente e iniciar o `MouseTap` assim que for concedida, sem relançar.
-- [ ] Tratar `tapCreate` falhando por falta de Input Monitoring com mensagem própria.
+- [x] Detectar a permissão ausente e mostrar um aviso na menu bar com atalho para Privacy & Security → Accessibility.
+- [x] Verificar `AXIsProcessTrusted()` periodicamente e iniciar o `MouseTap` assim que for concedida, sem relançar.
+- [x] Tratar `tapCreate` falhando por falta de Input Monitoring com mensagem própria.
 - [ ] Reativar o tap quando o sistema desabilitar (já há tratamento para timeout, validar na prática).
 
 ## 5. Empacotar como .app

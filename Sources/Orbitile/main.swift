@@ -3,36 +3,101 @@ import OrbitileCore
 import ServiceManagement
 import SwiftUI
 
+/// What the app can do right now. Anything but `.active` shows a hint in the menu and keeps polling.
+enum Readiness {
+    case active, needsAccessibility, needsInputMonitoring
+
+    var message: String {
+        switch self {
+        case .active: "Orbitile is active"
+        case .needsAccessibility: "Accessibility access needed"
+        case .needsInputMonitoring: "Input Monitoring access needed"
+        }
+    }
+
+    var settingsTitle: String? {
+        switch self {
+        case .active: nil
+        case .needsAccessibility: "Open Accessibility Settings…"
+        case .needsInputMonitoring: "Open Input Monitoring Settings…"
+        }
+    }
+
+    var settingsURL: URL? {
+        switch self {
+        case .active: nil
+        case .needsAccessibility: URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")
+        case .needsInputMonitoring: URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent")
+        }
+    }
+}
+
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
+    private let statusLine = NSMenuItem(title: "", action: nil, keyEquivalent: "")
+    private let settingsItem = NSMenuItem(title: "", action: #selector(openSettings), keyEquivalent: "")
     private let loginItem = NSMenuItem(title: "Launch at Login", action: #selector(toggleLaunchAtLogin), keyEquivalent: "")
     private let tap = MouseTap()
     private var statusItem: NSStatusItem?
+    private var readiness = Readiness.needsAccessibility
+    private var poll: Timer?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         let status = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         status.button?.image = MenuBarIcon.make()
         let menu = NSMenu()
         menu.delegate = self
+        statusLine.isEnabled = false
+        settingsItem.target = self
         loginItem.target = self
-        menu.addItem(loginItem)
-        menu.addItem(.separator())
+        [statusLine, settingsItem, .separator(), loginItem, .separator()].forEach(menu.addItem)
         menu.addItem(withTitle: "Quit Orbitile", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         status.menu = menu
         statusItem = status
 
-        // Accessibility is required both for the window under the cursor and for moving it.
-        let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
-        guard AXIsProcessTrustedWithOptions(options) else {
-            fputs("Orbitile: grant Accessibility access, then relaunch.\n", stderr)
-            return
+        // Ask once at launch; after that the menu points to System Settings and we keep checking.
+        if !AXIsProcessTrusted() {
+            let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
+            _ = AXIsProcessTrustedWithOptions(options)
         }
-        if !tap.start() {
-            fputs("Orbitile: could not create the event tap (check Input Monitoring).\n", stderr)
+        refreshReadiness()
+    }
+
+    /// Starts the event tap as soon as the permissions allow it, without a relaunch.
+    private func refreshReadiness() {
+        if tap.isRunning {
+            readiness = .active
+        } else if !AXIsProcessTrusted() {
+            readiness = .needsAccessibility
+        } else {
+            readiness = tap.start() ? .active : .needsInputMonitoring
+        }
+        statusItem?.button?.appearsDisabled = readiness != .active
+        statusItem?.button?.toolTip = readiness.message
+        applyReadinessToMenu()
+
+        if readiness == .active {
+            poll?.invalidate()
+            poll = nil
+        } else if poll == nil {
+            poll = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { [weak self] _ in
+                MainActor.assumeIsolated { self?.refreshReadiness() }
+            }
         }
     }
 
+    private func applyReadinessToMenu() {
+        statusLine.title = readiness.message
+        settingsItem.title = readiness.settingsTitle ?? ""
+        settingsItem.isHidden = readiness == .active
+    }
+
+    @objc private func openSettings() {
+        if let url = readiness.settingsURL { NSWorkspace.shared.open(url) }
+    }
+
     func menuNeedsUpdate(_ menu: NSMenu) {
+        refreshReadiness()
         loginItem.state = SMAppService.mainApp.status == .enabled ? .on : .off
     }
 
