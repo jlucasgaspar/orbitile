@@ -13,10 +13,10 @@ final class MouseTap {
     private static let middleButton: Int64 = 2
     private static let escapeKey: Int64 = 53
 
-    /// Main row and keypad 2 / 4 / 6 / 8 -> family index.
+    /// Main row and keypad 2 / 4 / 6 / 8 / 0 (for 10) -> family index.
     private static let familyKeys: [Int64: Int] = [
-        19: 0, 21: 1, 22: 2, 28: 3,
-        84: 0, 86: 1, 88: 2, 91: 3,
+        19: 0, 21: 1, 22: 2, 28: 3, 29: 4,
+        84: 0, 86: 1, 88: 2, 91: 3, 82: 4,
     ]
 
     private var tap: CFMachPort?

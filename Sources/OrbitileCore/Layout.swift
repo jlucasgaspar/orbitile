@@ -2,7 +2,7 @@ import CoreGraphics
 import Foundation
 
 /// A tiling family: how many cells the screen is divided into.
-/// Placed on the fan at 12h (2), 3h (4), 6h (6) and 9h (8).
+/// The families sit evenly around the ring, the first at 12 o'clock, clockwise.
 public struct LayoutFamily: Equatable, Sendable {
     public let id: Int
     public let cols: Int
@@ -16,12 +16,15 @@ public struct LayoutFamily: Equatable, Sendable {
         (index % cols, index / cols)
     }
 
-    public static let all: [LayoutFamily] = [
-        LayoutFamily(id: 2, cols: 2, rows: 1, angle: -90),
-        LayoutFamily(id: 4, cols: 2, rows: 2, angle: 0),
-        LayoutFamily(id: 6, cols: 3, rows: 2, angle: 90),
-        LayoutFamily(id: 8, cols: 4, rows: 2, angle: 180),
-    ]
+    public static let all: [LayoutFamily] = {
+        let grids = [(2, 1), (2, 2), (3, 2), (4, 2), (5, 2)]
+        return grids.enumerated().map { i, g in
+            LayoutFamily(id: g.0 * g.1, cols: g.0, rows: g.1, angle: -90 + 360 / Double(grids.count) * Double(i))
+        }
+    }()
+
+    /// Half of the arc each family owns on the ring.
+    public static var halfSpan: Double { 180 / Double(all.count) }
 }
 
 public enum FanHit: Equatable, Sendable {

@@ -175,6 +175,7 @@ func renderSnapshots(to dir: String) {
     render("open", family: 3, cell: nil, drag: nil)
     render("hover", family: 1, cell: 2, drag: nil)
     render("drag", family: 3, cell: 2, drag: 1)
+    render("ten", family: 4, cell: 6, drag: nil)
 
     // Menu bar mark at 1x, 2x and 12x, on light and dark bars.
     let icon = MenuBarIcon.make()

@@ -7,10 +7,11 @@ func expect<T: Equatable>(_ a: T, _ b: T, _ name: String) {
     if a == b { print("ok   \(name)") } else { print("FAIL \(name): \(a) != \(b)"); failures += 1 }
 }
 
-expect(FanGeometry.hit(CGPoint(x: 0, y: -80), expanded: nil), .family(0), "ring 12h -> family 2")
-expect(FanGeometry.hit(CGPoint(x: 80, y: 0), expanded: nil), .family(1), "ring 3h -> family 4")
-expect(FanGeometry.hit(CGPoint(x: 0, y: 80), expanded: nil), .family(2), "ring 6h -> family 6")
-expect(FanGeometry.hit(CGPoint(x: -80, y: 0), expanded: nil), .family(3), "ring 9h -> family 8")
+func onRing(_ degrees: Double) -> CGPoint { CGPoint(x: 80 * cos(degrees * .pi / 180), y: 80 * sin(degrees * .pi / 180)) }
+for (i, f) in LayoutFamily.all.enumerated() {
+    expect(FanGeometry.hit(onRing(f.angle), expanded: nil), .family(i), "ring angle \(f.angle) -> family \(f.id)")
+}
+expect(LayoutFamily.all.map(\.id), [2, 4, 6, 8, 10], "five families: 2, 4, 6, 8, 10")
 expect(FanGeometry.hit(CGPoint(x: 0, y: 40), expanded: nil), .none, "center without grid is invalid")
 expect(FanGeometry.hit(CGPoint(x: 200, y: 0), expanded: nil), .none, "outside fan is invalid")
 

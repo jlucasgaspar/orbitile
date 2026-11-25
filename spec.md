@@ -101,7 +101,8 @@ As imagens em `docs/images/` agora são renderizadas pelas próprias views Swift
 
 ## 10. Opcional / depois
 
-- [ ] Famílias extras (1/3, 2/3, 1/5) exploradas em [design/](design/Orbitile%20refinamento%20visual%20MVP/Orbitile%20Refinamento.dc.html).
+- [x] Quinta família de 10 células (5 × 2) no anel, com a tecla `0`. O anel divide o círculo em fatias iguais conforme o número de famílias.
+- [ ] Outras famílias exploradas em [design/](design/Orbitile%20refinamento%20visual%20MVP/Orbitile%20Refinamento.dc.html).
 - [ ] Modo claro do disco.
 - [ ] Acessibilidade do overlay (VoiceOver, Reduce Motion desliga as animações).
 - [ ] Localização: textos do hint hoje só em inglês.

@@ -3,11 +3,30 @@ import CoreGraphics
 @testable import OrbitileCore
 
 @Suite struct LayoutTests {
-    @Test func ringPicksFamilyByQuadrant() {
-        #expect(FanGeometry.hit(CGPoint(x: 0, y: -80), expanded: nil) == .family(0))
-        #expect(FanGeometry.hit(CGPoint(x: 80, y: 0), expanded: nil) == .family(1))
-        #expect(FanGeometry.hit(CGPoint(x: 0, y: 80), expanded: nil) == .family(2))
-        #expect(FanGeometry.hit(CGPoint(x: -80, y: 0), expanded: nil) == .family(3))
+    private func onRing(_ degrees: Double, radius: Double = 80) -> CGPoint {
+        CGPoint(x: radius * cos(degrees * .pi / 180), y: radius * sin(degrees * .pi / 180))
+    }
+
+    @Test func ringPicksFamilyByAngle() {
+        for (i, f) in LayoutFamily.all.enumerated() {
+            #expect(FanGeometry.hit(onRing(f.angle), expanded: nil) == .family(i))
+        }
+    }
+
+    @Test func fiveFamiliesSitEvenlyFromTwelveOClock() {
+        let all = LayoutFamily.all
+        #expect(all.map(\.id) == [2, 4, 6, 8, 10])
+        #expect(all.map(\.angle) == [-90, -18, 54, 126, 198])
+        #expect(all[4].cols == 5 && all[4].rows == 2)
+        #expect(LayoutFamily.halfSpan == 36)
+    }
+
+    @Test func boundariesBetweenFamiliesSplitTheArc() {
+        // 36 degrees away from two neighbours: just before the edge belongs to the first, just after to the next.
+        #expect(FanGeometry.hit(onRing(-90 + 35), expanded: nil) == .family(0))
+        #expect(FanGeometry.hit(onRing(-90 + 37), expanded: nil) == .family(1))
+        #expect(FanGeometry.hit(onRing(198 + 35), expanded: nil) == .family(4))
+        #expect(FanGeometry.hit(onRing(198 + 37), expanded: nil) == .family(0))
     }
 
     @Test func centerAndOutsideAreInvalid() {
@@ -55,6 +74,7 @@ import CoreGraphics
 
     @Test func startsOnGivenFamily() {
         #expect(FanState(family: 3).familyIndex == 3)
+        #expect(FanState(family: 4).familyIndex == 4)
         #expect(FanState(family: 9).familyIndex == nil)
         #expect(FanState().familyIndex == nil)
     }
@@ -121,6 +141,14 @@ import CoreGraphics
         let r = FanGeometry.targetRect(eight, from: 2, to: 0, in: area, inset: 0)
         #expect(r == CGRect(x: 0, y: 100, width: 300, height: 100))
         #expect(r == FanGeometry.targetRect(eight, from: 0, to: 2, in: area, inset: 0))
+    }
+
+    @Test func tenCellFamilyMergesAcrossFiveColumns() {
+        let ten = LayoutFamily.all[4]
+        let r = FanGeometry.targetRect(ten, from: 0, to: 9, in: CGRect(x: 0, y: 0, width: 500, height: 200), inset: 0)
+        #expect(r == CGRect(x: 0, y: 0, width: 500, height: 200))
+        let mid = FanGeometry.targetRect(ten, from: 1, to: 3, in: CGRect(x: 0, y: 0, width: 500, height: 200), inset: 0)
+        #expect(mid == CGRect(x: 100, y: 100, width: 300, height: 100))
     }
 
     @Test func singleCellSpanEqualsCell() {

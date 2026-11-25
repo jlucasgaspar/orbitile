@@ -99,13 +99,14 @@ private func polar(_ r: CGFloat, _ degrees: Double) -> CGSize {
     return CGSize(width: r * cos(a), height: r * sin(a))
 }
 
-/// Annular sector centered on `angle`, ±45°, with a constant gap between neighbours.
+/// Annular sector centered on `angle`, covering the family's share of the ring, with a constant gap between neighbours.
 private struct Blade: Shape {
     let r0: CGFloat, r1: CGFloat, angle: Double, gap: CGFloat
 
     func path(in rect: CGRect) -> Path {
         let o = CGPoint(x: rect.midX, y: rect.midY)
-        let a0 = angle - 45, a1 = angle + 45, h = gap / 2
+        let half = LayoutFamily.halfSpan
+        let a0 = angle - half, a1 = angle + half, h = gap / 2
         let dO = asin(min(0.99, h / r1)) * 180 / .pi
         let dI = asin(min(0.99, h / r0)) * 180 / .pi
         let n = 12

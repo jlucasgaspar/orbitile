@@ -17,7 +17,7 @@
 
 ## What it does
 
-Hover a window, click the middle button, and a ring of four layouts opens around the cursor. Move to a layout, pick a cell on the mini screen, and the window moves there. A blue preview shows the exact destination on your real screen before you commit.
+Hover a window, click the middle button, and a ring of five layouts opens around the cursor. Move to a layout, pick a cell on the mini screen, and the window moves there. A blue preview shows the exact destination on your real screen before you commit.
 
 | Open | Click a cell | Drag to merge | Preview on screen |
 | :---: | :---: | :---: | :---: |
@@ -26,12 +26,15 @@ Hover a window, click the middle button, and a ring of four layouts opens around
 
 ### Layouts
 
-| Family | Position on the ring | Grid | Key |
-| :---: | :---: | :---: | :---: |
-| 2 | 12 o'clock | 2 × 1 | `2` |
-| 4 | 3 o'clock | 2 × 2 | `4` |
-| 6 | 6 o'clock | 3 × 2 | `6` |
-| 8 | 9 o'clock | 4 × 2 | `8` |
+The ring has five equal slices, starting at 12 o'clock and going clockwise.
+
+| Family | Cells | Grid | Position on the ring | Key |
+| :---: | :---: | :---: | :---: | :---: |
+| 2 | 2 | 2 × 1 | 12 o'clock | `2` |
+| 4 | 4 | 2 × 2 | about 2 o'clock | `4` |
+| 6 | 6 | 3 × 2 | about 5 o'clock | `6` |
+| 8 | 8 | 4 × 2 | about 7 o'clock | `8` |
+| 10 | 10 | 5 × 2 | about 10 o'clock | `0` |
 
 ## Requirements
 
@@ -73,7 +76,7 @@ Builds are ad-hoc signed, and macOS ties the Accessibility grant to the signatur
 
 1. Hover the window you want to move.
 2. **Click the middle button once and release.** You do not need to hold it. The fan opens centered on the cursor, and slides to stay on screen near the edges.
-3. Hover a layout on the ring, or press `2`, `4`, `6` or `8`.
+3. Hover a layout on the ring, or press `2`, `4`, `6`, `8` or `0` (for the 10-cell layout).
 4. Point at a cell on the mini screen. The blue preview shows where the window will go.
 5. **Click a cell** to apply instantly, or **press and drag across several cells** and release to merge them into one area.
 
@@ -82,7 +85,7 @@ Builds are ad-hoc signed, and macOS ties the Accessibility grant to the signatur
 | Action | How |
 | --- | --- |
 | Open | Middle click on a window |
-| Switch layout | Hover the ring, or press `2` `4` `6` `8` |
+| Switch layout | Hover the ring, or press `2` `4` `6` `8` `0` |
 | Apply to one cell | Left click the cell, or middle click while hovering it |
 | Merge cells | Press on a cell, drag over others, release |
 | Cancel | `Esc`, click outside the disc, or middle click with no cell hovered |

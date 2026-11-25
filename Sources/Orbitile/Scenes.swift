@@ -30,7 +30,10 @@ enum Scenes {
             let r = FanGeometry.cellRect(family8, index: i)
             return CGPoint(x: center.x + r.midX, y: center.y + r.midY)
         }
-        func ring(_ dx: CGFloat, _ dy: CGFloat) -> CGPoint { CGPoint(x: center.x + dx, y: center.y + dy) }
+        func ring(family index: Int) -> CGPoint {
+            let a = LayoutFamily.all[index].angle * .pi / 180
+            return CGPoint(x: center.x + 82 * cos(a), y: center.y + 82 * sin(a))
+        }
 
         var frames: [Frame] = []
         var cursor = start
@@ -50,9 +53,9 @@ enum Scenes {
         add(10, open: 0, fan: false)                              // desktop, cursor on the window
         for i in 1...3 { add(1, open: Double(i) / 3) }            // 120 ms pop
         add(12)                                                   // family 8 already active
-        move(to: ring(82, 0), frames: 10); add(8)                 // family 4
-        move(to: ring(0, 82), frames: 10); add(8)                 // family 6
-        move(to: ring(-82, 0), frames: 10); add(6)                // family 8
+        move(to: ring(family: 1), frames: 10); add(8)                 // family 4
+        move(to: ring(family: 2), frames: 10); add(8)                 // family 6
+        move(to: ring(family: 3), frames: 10); add(6)                // family 8
         move(to: cellPoint(1), frames: 12); add(8)                // hover a cell
         add(4, drag: true)                                        // press
         move(to: cellPoint(2), frames: 6, drag: true); add(16, drag: true)  // merge, preview
@@ -140,7 +143,7 @@ enum Scenes {
             guard let f = last ? picks.last : picks.first else { return }
             write(f, to: URL(fileURLWithPath: "\(dir)/\(name).png"), scale: 2)
         }
-        still("still-open", where: { $0.showFan && !$0.dragging && $0.openProgress == 1 && $0.cursor.x < 330 })
+        still("still-open", where: { $0.showFan && !$0.dragging && $0.openProgress == 1 && hypot($0.cursor.x - 400, $0.cursor.y - 290) > 75 })
         still("still-click", where: { $0.showFan && $0.dragging })
         still("still-merge", where: { $0.showFan && $0.dragging }, last: true)
         print("frames: \(all.count)")
