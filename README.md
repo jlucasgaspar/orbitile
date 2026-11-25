@@ -44,8 +44,8 @@ Hover a window, click the middle button, and a ring of four layouts opens around
 
 ### Download
 
-1. Get `Orbitile-x.y.z.zip` from the [Releases page](https://github.com/jlucasgaspar/orbitile/releases) and unzip it.
-2. Drag **Orbitile.app** to `/Applications` and open it.
+1. Get `Orbitile-x.y.z.dmg` from the [Releases page](https://github.com/jlucasgaspar/orbitile/releases) and open it. (There is also a `.zip` with the same app.)
+2. Drag **Orbitile** onto the **Applications** shortcut in the window, then open it from `/Applications`.
 3. If macOS says it cannot verify the app (builds that are not notarized), right-click the app and choose **Open**, or run:
 
    ```sh
@@ -104,7 +104,7 @@ Releasing a drag outside the cells only clears the selection and keeps the fan o
 | `Sources/OrbitileChecks` | Assertions for the core. Run with `swift run OrbitileChecks` |
 | `design/` | The design project exported from Claude Design (reference only) |
 | `docs/images/` | Logo and images used by this README |
-| `scripts/` | `build-app.sh` (the `.app`), `release.sh` (zip, checksum, notarization), `make-icon.sh` (the `.icns`) |
+| `scripts/` | `build-app.sh` (the `.app`), `release.sh` (`.dmg`, `.zip`, checksums, notarization), `make-icon.sh` (the `.icns`) |
 
 ## Roadmap
 

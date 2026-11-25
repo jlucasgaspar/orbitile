@@ -51,7 +51,11 @@ final class MouseTap {
         guard let tap = CGEvent.tapCreate(
             tap: .cgSessionEventTap, place: .headInsertEventTap, options: .defaultTap,
             eventsOfInterest: mask, callback: callback,
-            userInfo: Unmanaged.passUnretained(self).toOpaque()) else { return false }
+            userInfo: Unmanaged.passUnretained(self).toOpaque()) else {
+            Log.app.error("CGEvent.tapCreate returned nil (Input Monitoring or Accessibility missing)")
+            return false
+        }
+        Log.app.notice("event tap created")
         self.tap = tap
         let source = CFMachPortCreateRunLoopSource(nil, tap, 0)
         self.source = source
@@ -95,7 +99,10 @@ final class MouseTap {
                 return true
             }
             // Capture first, overlay second: the session grabs the window in its init.
-            guard let s = GestureSession(startingAt: event.location) else { return false }
+            guard let s = GestureSession(startingAt: event.location) else {
+                Log.app.notice("middle click ignored: no movable window under the cursor")
+                return false
+            }
             session = s
             swallowMiddleUp = true
             return true

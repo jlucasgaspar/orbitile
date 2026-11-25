@@ -88,7 +88,7 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 
 - [x] Licença MIT (`LICENSE`) e URL do repositório no README.
 - [ ] (precisa de conta Apple Developer) Assinar com Developer ID e notarizar (`notarytool`) para abrir sem aviso do Gatekeeper.
-- [x] `scripts/release.sh <versão>` gera o `.zip` (com `ditto`) e o `.sha256`; com `--publish` cria o release via `gh`. Falta publicar o primeiro (v0.1.0): fazer o push, `gh auth login` e `scripts/release.sh 0.1.0 --publish`.
+- [x] `scripts/release.sh <versão>` gera o `.dmg` (app + atalho para Applications), o `.zip` e um `.sha256` de cada; com `--publish` cria o release via `gh`. Falta publicar o primeiro (v0.1.0): fazer o push, `gh auth login` e `scripts/release.sh 0.1.0 --publish`.
 - [ ] Opcional: Homebrew cask.
 - [x] Seção Install do [README.md](README.md) aponta para a página de Releases.
 

@@ -44,6 +44,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var statusItem: NSStatusItem?
     private var readiness = Readiness.needsAccessibility
     private var poll: Timer?
+    private var lastLogged: Readiness?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         let status = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
@@ -79,6 +80,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             readiness = .active
         } else {
             readiness = tap.start() ? .active : .needsInputMonitoring
+        }
+        if readiness != lastLogged {
+            lastLogged = readiness
+            Log.app.notice("readiness: \(String(describing: self.readiness), privacy: .public) (AX trusted: \(AXIsProcessTrusted()), listen access: \(CGPreflightListenEventAccess()), tap running: \(self.tap.isRunning))")
         }
         statusItem?.button?.appearsDisabled = readiness != .active || !tap.isEnabled
         statusItem?.button?.toolTip = statusText
