@@ -43,6 +43,10 @@ cat > "$app/Contents/Info.plist" <<PLIST
 </plist>
 PLIST
 
-codesign --force --options runtime --sign "$identity" "$app"
+# Ad-hoc signatures default to a cdhash requirement, which changes on every build and makes macOS
+# drop the Accessibility/Input Monitoring grant. Pin the requirement to the bundle id instead.
+req=()
+[ "$identity" = "-" ] && req=(-r='designated => identifier "app.orbitile.Orbitile"')
+codesign --force --options runtime --sign "$identity" ${req[@]+"${req[@]}"} "$app"
 codesign --verify --verbose=1 "$app"
 echo "built $app (signed with: $identity)"
