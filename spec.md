@@ -1,20 +1,28 @@
 # Orbitile: o que falta fazer
 
-Estado atual: o fluxo principal está implementado (abrir com clique do meio, famílias 2/4/6/8, teclas, clique em célula, merge por arraste, preview no destino real, cancelar, blur, animações). Nada disso foi validado com o app rodando. Os itens abaixo estão na ordem sugerida.
+Estado atual: o fluxo principal está implementado e o app já vem empacotado (`.app`, ícone, menu bar, permissões sem relançar, Enable/Disable, About, licença, script de release). O José testou o cursor, o blur, os eventos de mouse/teclado e a animação da janela em 2026-11-25 e disse que estava tudo certo. O que sobra está nas seções abaixo, na ordem sugerida.
+
+## Resumo: o que falta
+
+1. **Antes do primeiro release:** testar o `.app` (Launch at Login, foco do app alvo, clique do meio passando direto), consertar o `LayoutTests.swift` e publicar a v0.1.0 (seções 1, 2 e 8).
+2. **Robustez no dia a dia:** vários monitores, Spaces e tela cheia, janelas com tamanho mínimo, Dock/menu bar ocultos e permissão revogada com o app rodando (seções 4 e 6).
+3. **Sem dinheiro envolvido, mas depende de decisão:** gatilho alternativo para quem não tem botão do meio e as preferências (seções 6 e 7).
+4. **Depende de uma conta Apple Developer:** assinatura Developer ID e notarização, para o app abrir sem aviso do Gatekeeper (seção 8).
+5. **Opcional:** gravação de tela real, Homebrew cask, famílias extras, modo claro, acessibilidade e localização (seções 9 e 10).
 
 ## 1. Validar no app real
 
-Rodar `swift run Orbitile` e passar pela lista. Corrigir o que falhar antes de seguir.
+Marcados: validados pelo José em 2026-11-25. Os dois últimos itens (clique do meio sem janela movível e foco do app alvo) ainda não foram confirmados.
 
-- [ ] Clique do meio abre o overlay e soltar o botão não fecha.
-- [ ] O disco centraliza no cursor e desliza para caber perto das bordas.
-- [ ] Hover no anel troca a família; `2` `4` `6` `8` (linha principal e teclado numérico) também.
-- [ ] Clique esquerdo numa célula aplica na hora.
-- [ ] Arrastar sobre várias células faz merge e o preview mostra o retângulo envolvente.
-- [ ] Soltar fora das células limpa a seleção e mantém o overlay aberto.
-- [ ] `Esc`, clique fora do disco e clique do meio sem célula cancelam.
-- [ ] Blur atrás do disco aparece sobre outras janelas ([OverlayPanel.swift](Sources/Orbitile/OverlayPanel.swift)).
-- [ ] Animação de 220 ms da janela fica fluida. Se travar em apps lentos, reduzir os passos ou voltar ao movimento instantâneo ([WindowAccess.swift](Sources/Orbitile/WindowAccess.swift)).
+- [x] Clique do meio abre o overlay e soltar o botão não fecha.
+- [x] O disco centraliza no cursor e desliza para caber perto das bordas.
+- [x] Hover no anel troca a família; `2` `4` `6` `8` (linha principal e teclado numérico) também.
+- [x] Clique esquerdo numa célula aplica na hora.
+- [x] Arrastar sobre várias células faz merge e o preview mostra o retângulo envolvente.
+- [x] Soltar fora das células limpa a seleção e mantém o overlay aberto.
+- [x] `Esc`, clique fora do disco e clique do meio sem célula cancelam.
+- [x] Blur atrás do disco aparece sobre outras janelas ([OverlayPanel.swift](Sources/Orbitile/OverlayPanel.swift)).
+- [x] Animação de 220 ms da janela fica fluida. Se travar em apps lentos, reduzir os passos ou voltar ao movimento instantâneo ([WindowAccess.swift](Sources/Orbitile/WindowAccess.swift)).
 - [ ] O clique do meio passa direto quando não há janela movível sob o cursor.
 - [ ] O app alvo não perde o foco quando o overlay abre.
 
@@ -22,12 +30,11 @@ Rodar `swift run Orbitile` e passar pela lista. Corrigir o que falhar antes de s
 
 Refinado a partir do código do design. Conferir lado a lado com o mockup:
 
-- [ ] O fan abre com uma família já ativa (a última usada, família 8 na primeira vez), arco azul e glifo branco, como no quadro "1 · Aberto".
-- [ ] Hover numa célula clareia para branco 17%. O azul só aparece enquanto se pressiona ou arrasta, e o retângulo azul desliza entre seleções em 110 ms.
-- [ ] Fatias do anel com gap de 6 pt e filete azul de 1.5 pt; glifos 20×13 com cantos externos arredondados em 3 pt.
-- [ ] Hint em 10 pt Medium, branco 45%, a 43 pt do centro: "Click or drag" / "Release to apply".
-- [ ] Cursor: o overlay não toma foco, então o app de baixo impunha o cursor dele (I-beam em editores). Agora o `MouseTap` liga `SetsCursorInBackground` (API privada do WindowServer, `CGSSetConnectionProperty`) e força `NSCursor.arrow`, e engole `mouseMoved` enquanto o overlay está aberto. Validar que a seta aparece sobre campos de texto e que o cursor volta ao normal ao fechar. Se a API privada quebrar em alguma versão do macOS, o plano B é uma janela do overlay que aceite mouse e use cursor rects.
-- [ ] Efeitos do design ainda fora: nenhum ponto conhecido além dos itens acima. Qualquer diferença visual que sobrar entra aqui.
+- [x] O fan abre com uma família já ativa (a última usada, família 8 na primeira vez), arco azul e glifo branco, como no quadro "1 · Aberto".
+- [x] Hover numa célula clareia para branco 17%. O azul só aparece enquanto se pressiona ou arrasta, e o retângulo azul desliza entre seleções em 110 ms.
+- [x] Fatias do anel com gap de 2.5 pt (o design usa 6, o José pediu mais junto) e filete azul de 1.5 pt; glifos 20×13 com cantos externos arredondados em 3 pt.
+- [x] Hint em 10 pt Medium, branco 45%, a 43 pt do centro: "Click or drag" / "Release to apply".
+- [x] Cursor: o overlay não toma foco, então o app de baixo impunha o cursor dele (I-beam em editores). Agora o `MouseTap` liga `SetsCursorInBackground` (API privada do WindowServer, `CGSSetConnectionProperty`) e força `NSCursor.arrow`, e engole `mouseMoved` enquanto o overlay está aberto. Validar que a seta aparece sobre campos de texto e que o cursor volta ao normal ao fechar. Se a API privada quebrar em alguma versão do macOS, o plano B é uma janela do overlay que aceite mouse e use cursor rects.
 
 ## 2. Corrigir os testes
 
@@ -51,6 +58,7 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 - [x] Verificar `AXIsProcessTrusted()` periodicamente e iniciar o `MouseTap` assim que for concedida, sem relançar.
 - [x] Tratar `tapCreate` falhando por falta de Input Monitoring com mensagem própria.
 - [ ] Reativar o tap quando o sistema desabilitar (já há tratamento para timeout, validar na prática).
+- [ ] Permissão revogada com o app rodando: hoje `tap.isRunning` continua verdadeiro e o menu segue mostrando "active". Checar `AXIsProcessTrusted()` a cada abertura do menu e ao abrir o overlay, e voltar a `needsAccessibility`.
 
 ## 5. Empacotar como .app
 
@@ -58,7 +66,8 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 - [x] Ícone `.icns` gerado de [icon-light.svg](docs/images/icon-light.svg) (todos os tamanhos do iconset).
 - [x] Script `scripts/build-app.sh`: `swift build -c release`, monta `Orbitile.app/Contents/{MacOS,Resources,Info.plist}`.
 - [x] Assinatura. Ad-hoc (`codesign -s -`) para uso local. Com assinatura estável a permissão de Accessibility não se perde a cada build.
-- [ ] Documentar no README como conceder permissão ao `.app`, não ao terminal.
+- [x] Documentar no README como conceder permissão ao `.app`, não ao terminal.
+- [ ] Testar o `.app` instalado em `/Applications`: Launch at Login liga e desliga, e o app sobe sozinho depois de reiniciar a sessão.
 
 ## 6. Casos de borda
 
@@ -78,8 +87,8 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 ## 8. Distribuição
 
 - [x] Licença MIT (`LICENSE`) e URL do repositório no README.
-- [ ] Assinar com Developer ID e notarizar (`notarytool`) para abrir sem aviso do Gatekeeper.
-- [x] `scripts/release.sh <versão>` gera o `.zip` (com `ditto`) e o `.sha256`; com `--publish` cria o release via `gh`. Falta publicar o primeiro (v0.1.0).
+- [ ] (precisa de conta Apple Developer) Assinar com Developer ID e notarizar (`notarytool`) para abrir sem aviso do Gatekeeper.
+- [x] `scripts/release.sh <versão>` gera o `.zip` (com `ditto`) e o `.sha256`; com `--publish` cria o release via `gh`. Falta publicar o primeiro (v0.1.0): fazer o push, `gh auth login` e `scripts/release.sh 0.1.0 --publish`.
 - [ ] Opcional: Homebrew cask.
 - [x] Seção Install do [README.md](README.md) aponta para a página de Releases.
 

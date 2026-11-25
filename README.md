@@ -108,7 +108,7 @@ Releasing a drag outside the cells only clears the selection and keeps the fan o
 
 ## Roadmap
 
-What is left before a proper release (packaged `.app`, menu bar icon, launch at login, signed builds) is tracked in [spec.md](spec.md).
+What is left (multi-monitor testing, preferences, notarized builds and more) is tracked in [spec.md](spec.md).
 
 ## License
 
