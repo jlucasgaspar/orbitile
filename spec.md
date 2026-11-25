@@ -85,12 +85,10 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 
 ## 9. Imagens do README
 
-As imagens atuais em `docs/images/` são recortes do mockup em [design/](design), não do app.
+As imagens em `docs/images/` agora são renderizadas pelas próprias views SwiftUI do app (`swift run Orbitile --scenes <pasta>`, código em [Scenes.swift](Sources/Orbitile/Scenes.swift)) sobre um desktop de mentira. Não são gravações de tela do macOS.
 
-- [ ] Capturar screenshots reais do overlay (aberto, célula selecionada, merge, preview no destino) em tema escuro e claro.
-- [ ] Gravar um GIF curto do fluxo completo e colocar no topo do README.
-- [ ] Substituir `open.png`, `click.png`, `drag.png`, `preview.png` e `demo.png`.
-- [ ] Remover o aviso "renders of the design mockup" do README.
+- [x] Stills do overlay (aberto, clique, merge, preview no destino) e GIF do fluxo completo.
+- [ ] Opcional: trocar por uma gravação de tela real (com o blur e a janela de verdade se movendo), gravada com `Cmd+Shift+5` e convertida com `ffmpeg`.
 
 ## 10. Opcional / depois
 

@@ -10,10 +10,10 @@
 </p>
 
 <p align="center">
-  <img src="docs/images/demo.png" alt="Orbitile radial menu over a window" width="720">
+  <img src="docs/images/demo.gif" alt="Orbitile in action: open the fan, pick a layout, drag across cells, the window snaps into place" width="720">
 </p>
 
-> The images in this README are renders of the design mockup in [`design/`](design). Real screenshots will replace them (see [spec.md](spec.md)).
+> The images are rendered by the app's own SwiftUI views over a mock desktop, so they match what the app draws. Regenerate them with `swift run Orbitile --scenes <folder>`. The backdrop blur and the real window movement are not part of those renders.
 
 ## What it does
 
@@ -22,7 +22,7 @@ Hover a window, click the middle button, and a ring of four layouts opens around
 | Open | Click a cell | Drag to merge | Preview on screen |
 | :---: | :---: | :---: | :---: |
 | <img src="docs/images/open.png" width="200"> | <img src="docs/images/click.png" width="200"> | <img src="docs/images/drag.png" width="200"> | <img src="docs/images/preview.png" width="200"> |
-| Hover a family on the ring | Applies right away | Release to apply the merged area | The real target, before you commit |
+| Hover a family on the ring | Press a cell, release to apply | Drag across cells and release | The real target, before you commit |
 
 ### Layouts
 
