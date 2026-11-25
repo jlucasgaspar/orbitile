@@ -107,7 +107,7 @@ Releasing a drag outside the cells only clears the selection and keeps the fan o
 | `Sources/OrbitileChecks` | Assertions for the core. Run with `swift run OrbitileChecks` |
 | `design/` | The design project exported from Claude Design (reference only) |
 | `docs/images/` | Logo and images used by this README |
-| `scripts/` | `build-app.sh` (the `.app`), `release.sh` (`.dmg`, `.zip`, checksums, notarization), `make-icon.sh` (the `.icns`) |
+| `scripts/` | `build-app.sh` (the `.app`), `release.sh` (styled `.dmg`, `.zip`, checksums, notarization), `dmg-settings.py` (installer window layout), `make-icon.sh` (the `.icns`) |
 
 ## Roadmap
 

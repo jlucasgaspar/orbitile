@@ -198,6 +198,11 @@ func renderSnapshots(to dir: String) {
     bar("menubar-dark", dark: true)
 }
 
+if let i = CommandLine.arguments.firstIndex(of: "--dmg-background"), i + 1 < CommandLine.arguments.count {
+    MainActor.assumeIsolated { DmgArt.run(into: CommandLine.arguments[i + 1]) }
+    exit(0)
+}
+
 if let i = CommandLine.arguments.firstIndex(of: "--scenes"), i + 1 < CommandLine.arguments.count {
     MainActor.assumeIsolated { Scenes.run(into: CommandLine.arguments[i + 1]) }
     exit(0)

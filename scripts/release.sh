@@ -44,13 +44,22 @@ rm -f "$zip"
 ditto -c -k --norsrc --noextattr --keepParent "$app" "$zip"
 (cd dist && shasum -a 256 "Orbitile-${version}.zip" > "Orbitile-${version}.zip.sha256")
 
-# Disk image: the app next to an Applications shortcut, so installing is one drag.
-stage="$(mktemp -d)"
-trap 'rm -rf "$stage"' EXIT
-ditto --norsrc --noextattr "$app" "$stage/Orbitile.app"
-ln -s /Applications "$stage/Applications"
+# Disk image with the usual installer layout (background, app on the left, Applications on the right).
+# dmgbuild writes the Finder layout itself, so no GUI session is needed. It is installed once
+# into a throwaway venv under .build/.
+venv=".build/dmg-venv"
+if [ ! -x "$venv/bin/dmgbuild" ]; then
+  python3 -m venv "$venv"
+  "$venv/bin/pip" install -q dmgbuild
+fi
+art="$(mktemp -d)"
+trap 'rm -rf "$art"' EXIT
+"$(swift build -c release --show-bin-path)/Orbitile" --dmg-background "$art"
+tiffutil -cathidpicheck "$art/background.png" "$art/background@2x.png" -out "$art/background.tiff" 2>/dev/null
 rm -f "$dmg"
-hdiutil create -volname "Orbitile" -srcfolder "$stage" -fs HFS+ -format UDZO -ov "$dmg" >/dev/null
+"$venv/bin/dmgbuild" -s scripts/dmg-settings.py \
+  -D app="$app" -D background="$art/background.tiff" -D icon=Resources/Orbitile.icns \
+  "Orbitile" "$dmg" >/dev/null
 if [ "$identity" != "-" ]; then
   codesign --force --sign "$identity" "$dmg"
 fi
