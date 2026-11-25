@@ -45,6 +45,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var readiness = Readiness.needsAccessibility
     private var poll: Timer?
     private var lastLogged: Readiness?
+    private var askedInputMonitoring = false
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         let status = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
@@ -79,7 +80,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         } else if tap.isRunning {
             readiness = .active
         } else {
-            readiness = tap.start() ? .active : .needsInputMonitoring
+            if tap.start() {
+                readiness = .active
+            } else {
+                readiness = .needsInputMonitoring
+                // Same one-time prompt as Accessibility: without it the user would never be asked.
+                if !askedInputMonitoring {
+                    askedInputMonitoring = true
+                    _ = CGRequestListenEventAccess()
+                }
+            }
         }
         if readiness != lastLogged {
             lastLogged = readiness
