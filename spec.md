@@ -39,9 +39,9 @@ Refinado a partir do código do design. Conferir lado a lado com o mockup:
 
 Hoje usa o símbolo `square.grid.2x2` ([main.swift](Sources/Orbitile/main.swift)).
 
-- [ ] Gerar a marca como template image monocromática a partir de [logo.svg](docs/images/logo.svg): tile ativo sólido, os outros a 40% (regra do design).
-- [ ] Incluir variantes 1x/2x e marcar como `isTemplate` para funcionar em menu bar clara e escura.
-- [ ] Menu com: Enable/Disable, Launch at Login, About, Quit.
+- [x] Gerar a marca como template image monocromática a partir de [logo.svg](docs/images/logo.svg): tile ativo sólido, os outros a 40% (regra do design).
+- [x] Incluir variantes 1x/2x e marcar como `isTemplate` para funcionar em menu bar clara e escura.
+- [x] Menu com Launch at Login (`SMAppService`, só funciona no `.app`) e Quit. Falta: Enable/Disable e About.
 
 ## 4. Permissões sem relançar
 
@@ -54,10 +54,10 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 
 ## 5. Empacotar como .app
 
-- [ ] `Info.plist` com bundle id, versão e `LSUIElement = true` (sem ícone no Dock).
-- [ ] Ícone `.icns` gerado de [icon-light.svg](docs/images/icon-light.svg) (todos os tamanhos do iconset).
-- [ ] Script `scripts/build-app.sh`: `swift build -c release`, monta `Orbitile.app/Contents/{MacOS,Resources,Info.plist}`.
-- [ ] Assinatura. Ad-hoc (`codesign -s -`) para uso local. Com assinatura estável a permissão de Accessibility não se perde a cada build.
+- [x] `Info.plist` com bundle id, versão e `LSUIElement = true` (sem ícone no Dock).
+- [x] Ícone `.icns` gerado de [icon-light.svg](docs/images/icon-light.svg) (todos os tamanhos do iconset).
+- [x] Script `scripts/build-app.sh`: `swift build -c release`, monta `Orbitile.app/Contents/{MacOS,Resources,Info.plist}`.
+- [x] Assinatura. Ad-hoc (`codesign -s -`) para uso local. Com assinatura estável a permissão de Accessibility não se perde a cada build.
 - [ ] Documentar no README como conceder permissão ao `.app`, não ao terminal.
 
 ## 6. Casos de borda
@@ -70,7 +70,7 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 
 ## 7. Preferências
 
-- [ ] Launch at Login via `SMAppService.mainApp`.
+- [x] Launch at Login via `SMAppService.mainApp`.
 - [ ] Ligar/desligar o app pela menu bar.
 - [ ] Margem entre janelas (hoje fixa em 6 pt, parâmetro `inset`).
 - [ ] Escolher o botão de abertura.
