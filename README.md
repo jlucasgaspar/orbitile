@@ -41,7 +41,7 @@ The ring has five equal slices, starting at 12 o'clock and going clockwise.
 - macOS 14 (Sonoma) or newer
 - A mouse with a middle button (a clickable scroll wheel)
 - Swift 5.9+ toolchain (Xcode 15+ or the Command Line Tools) to build from source
-- Accessibility permission, and possibly Input Monitoring
+- Accessibility permission
 
 ## Install
 
@@ -49,13 +49,19 @@ The ring has five equal slices, starting at 12 o'clock and going clockwise.
 
 1. Get `Orbitile-x.y.z.dmg` from the [Releases page](https://github.com/jlucasgaspar/orbitile/releases) and open it. (There is also a `.zip` with the same app.)
 2. Drag **Orbitile** onto the **Applications** shortcut in the window, then open it from `/Applications`.
-3. If macOS says it cannot verify the app (builds that are not notarized), right-click the app and choose **Open**, or run:
+3. **First launch.** Orbitile is not notarized (no paid Apple Developer account), so macOS blocks it with *"Apple could not verify Orbitile…"* and offers to move it to the Bin. **Do not choose Move to Bin.** Click **Done**, then do one of these, once:
 
-   ```sh
-   xattr -dr com.apple.quarantine /Applications/Orbitile.app
-   ```
+   - Run in Terminal, then open the app again:
 
-4. Grant **Accessibility** access when asked: **System Settings → Privacy & Security → Accessibility**, then enable Orbitile. It starts working right away, no relaunch needed. macOS may also ask for **Input Monitoring**, used by the global event tap.
+     ```sh
+     xattr -dr com.apple.quarantine /Applications/Orbitile.app
+     ```
+
+   - Or open **System Settings → Privacy & Security**, scroll down to *"Orbitile was blocked…"* and click **Open Anyway**.
+
+   (Right-click → Open no longer works on recent macOS versions.)
+
+4. Grant **Accessibility** access when asked: **System Settings → Privacy & Security → Accessibility**, then enable Orbitile. It starts working right away, no relaunch needed. If you update from an older version and it does nothing, remove Orbitile from that list, open it again and re-enable it, or run `tccutil reset Accessibility app.orbitile.Orbitile`.
 
 A small grid icon appears in the menu bar. From there you can pause Orbitile, start it at login, or quit.
 

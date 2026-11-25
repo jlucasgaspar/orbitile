@@ -75,14 +75,14 @@ ls -lh "$dmg" "$zip"
 cat "$dmg.sha256" "$zip.sha256"
 if [ -z "$profile" ]; then
   echo
-  echo "note: not notarized. Users must right-click > Open the first time, or run:"
+  echo "note: not notarized. Users must run this once, or use Privacy & Security > Open Anyway:"
   echo "  xattr -dr com.apple.quarantine /Applications/Orbitile.app"
 fi
 
 if $publish; then
   tag="v${version}"
   notes="Orbitile ${version}"
-  [ -z "$profile" ] && notes="${notes}"$'\n\n'"Not notarized: right-click the app and choose Open the first time, or run \`xattr -dr com.apple.quarantine /Applications/Orbitile.app\`."
+  [ -z "$profile" ] && notes="${notes}"$'\n\n'"**First launch:** this build is not notarized, so macOS will block it. Don't choose Move to Bin. Run \`xattr -dr com.apple.quarantine /Applications/Orbitile.app\` once (or System Settings > Privacy & Security > Open Anyway), then open the app and grant Accessibility."
   gh release create "$tag" "$dmg" "$dmg.sha256" "$zip" "$zip.sha256" --title "Orbitile ${version}" --notes "$notes"
 else
   echo

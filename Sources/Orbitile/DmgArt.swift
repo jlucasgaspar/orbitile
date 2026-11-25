@@ -38,7 +38,20 @@ private struct Background: View {
                 .font(.system(size: 15, weight: .medium))
                 .foregroundStyle(.black.opacity(0.55))
                 .frame(width: DmgArt.size.width)
-                .position(x: DmgArt.size.width / 2, y: 330)
+                .position(x: DmgArt.size.width / 2, y: 315)
+
+            VStack(spacing: 4) {
+                Text("If macOS says it can't verify Orbitile (unsigned build), run this once in Terminal:")
+                    .font(.system(size: 11))
+                    .foregroundStyle(.black.opacity(0.5))
+                Text("xattr -dr com.apple.quarantine /Applications/Orbitile.app")
+                    .font(.system(size: 11, weight: .medium, design: .monospaced))
+                    .foregroundStyle(.black.opacity(0.7))
+                    .padding(.horizontal, 10).padding(.vertical, 5)
+                    .background(RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.07)))
+            }
+            .frame(width: DmgArt.size.width)
+            .position(x: DmgArt.size.width / 2, y: 358)
         }
         .frame(width: DmgArt.size.width, height: DmgArt.size.height)
     }
