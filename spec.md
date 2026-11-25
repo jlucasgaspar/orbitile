@@ -77,7 +77,7 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 
 ## 8. Distribuição
 
-- [ ] Nome do repositório e licença (`LICENSE`). Ainda não há licença definida.
+- [x] Licença MIT (`LICENSE`) e URL do repositório no README.
 - [ ] Assinar com Developer ID e notarizar (`notarytool`) para abrir sem aviso do Gatekeeper.
 - [ ] Gerar `.zip` ou `.dmg` e publicar em GitHub Releases.
 - [ ] Opcional: Homebrew cask.

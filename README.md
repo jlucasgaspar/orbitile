@@ -45,7 +45,7 @@ Hover a window, click the middle button, and a ring of four layouts opens around
 There is no packaged release yet, so build from source:
 
 ```sh
-git clone <this repository>
+git clone https://github.com/jlucasgaspar/orbitile.git
 cd orbitile
 swift run -c release Orbitile
 ```
@@ -97,3 +97,7 @@ Releasing a drag outside the cells only clears the selection and keeps the fan o
 ## Roadmap
 
 What is left before a proper release (packaged `.app`, menu bar icon, launch at login, signed builds) is tracked in [spec.md](spec.md).
+
+## License
+
+Orbitile is released under the [MIT License](LICENSE).
