@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><style>@keyframes otPop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}@keyframes otIn{from{opacity:0}to{opacity:1}}</style></helmet>
+<div ref="{{ stageRef }}" style="{{ stageStyle }}" onPointerDown="{{ down }}" onPointerMove="{{ move }}" onPointerUp="{{ up }}" onPointerCancel="{{ up }}" onMouseDown="{{ md }}" onAuxClick="{{ ctx }}" onContextMenu="{{ ctx }}">
+  <sc-if value="{{ isScreen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 0; top: 0; right: 0; height: calc(var(--s) * 24px); display: flex; align-items: center; gap: calc(var(--s) * 18px); padding: 0 calc(var(--s) * 14px); background: rgba(16,16,18,0.55); font-size: calc(var(--s) * 13px); color: rgba(255,255,255,0.88); z-index: 4;">
+      <div style="width: calc(var(--s) * 12px); height: calc(var(--s) * 12px); border-radius: calc(var(--s) * 3px); background: rgba(255,255,255,0.8);"></div>
+      <span style="font-weight: 700;">Editor</span><span>File</span><span>Edit</span><span>View</span><span>Window</span>
+      <div style="flex: 1;"></div>
+      <dc-import name="Mark" variant="{{ markVariant }}" tone="mono-dark" size="{{ mbIcon }}" hint-size="8px,8px"></dc-import>
+    </div>
+  </sc-if>
+  <div style="{{ winStyle }}">
+    <div style="height: calc(var(--s) * 30px); flex: none; display: flex; align-items: center; gap: calc(var(--s) * 8px); padding: 0 calc(var(--s) * 12px); background: #2A2A2D; border-bottom: 0.5px solid rgba(0,0,0,0.5);">
+      <div style="width: calc(var(--s) * 12px); height: calc(var(--s) * 12px); border-radius: 50%; background: #FF5F57;"></div>
+      <div style="width: calc(var(--s) * 12px); height: calc(var(--s) * 12px); border-radius: 50%; background: #FEBC2E;"></div>
+      <div style="width: calc(var(--s) * 12px); height: calc(var(--s) * 12px); border-radius: 50%; background: #28C840;"></div>
+      <div style="flex: 1; text-align: center; font-size: calc(var(--s) * 12px); font-weight: 600; color: rgba(255,255,255,0.5); margin-right: calc(var(--s) * 56px);">Untitled</div>
+    </div>
+    <div style="flex: 1; display: flex; min-height: 0;">
+      <div style="width: calc(var(--s) * 170px); flex: none; background: #252527; border-right: 0.5px solid rgba(255,255,255,0.06); padding: calc(var(--s) * 16px); display: flex; flex-direction: column; gap: calc(var(--s) * 10px); box-sizing: border-box;">
+        <div style="height: calc(var(--s) * 8px); width: 70%; border-radius: 4px; background: rgba(255,255,255,0.08);"></div>
+        <div style="height: calc(var(--s) * 8px); width: 52%; border-radius: 4px; background: rgba(255,255,255,0.08);"></div>
+        <div style="height: calc(var(--s) * 8px); width: 80%; border-radius: 4px; background: rgba(255,255,255,0.08);"></div>
+        <div style="height: calc(var(--s) * 8px); width: 60%; border-radius: 4px; background: rgba(255,255,255,0.08);"></div>
+      </div>
+      <div style="flex: 1; min-width: 0; padding: calc(var(--s) * 24px); display: flex; flex-direction: column; gap: calc(var(--s) * 11px); box-sizing: border-box;">
+        <div style="height: calc(var(--s) * 14px); width: 38%; border-radius: 4px; background: rgba(255,255,255,0.14);"></div>
+        <div style="height: calc(var(--s) * 8px); width: 92%; border-radius: 4px; background: rgba(255,255,255,0.07);"></div>
+        <div style="height: calc(var(--s) * 8px); width: 86%; border-radius: 4px; background: rgba(255,255,255,0.07);"></div>
+        <div style="height: calc(var(--s) * 8px); width: 90%; border-radius: 4px; background: rgba(255,255,255,0.07);"></div>
+        <div style="height: calc(var(--s) * 8px); width: 58%; border-radius: 4px; background: rgba(255,255,255,0.07);"></div>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ previewStyle }}" hint-placeholder-val="{{ false }}"><div style="{{ previewStyle }}"></div></sc-if>
+  <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+    <div style="{{ fanStyle }}">
+      <div style="position: absolute; left: 0; top: 0; transform-origin: 0 0; animation: otPop 120ms cubic-bezier(.2,.9,.3,1);">
+        <sc-for list="{{ under }}" as="u"><div style="{{ u.style }}"></div></sc-for>
+        <svg width="400" height="400" viewBox="-200 -200 400 400" style="position: absolute; left: -200px; top: -200px; overflow: visible; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.38));">
+          <g transform="{{ gT }}"><sc-for list="{{ paths }}" as="pa"><path d="{{ pa.d }}" fill="{{ pa.fill }}" stroke="{{ pa.fill }}" strokeWidth="{{ pa.sw }}" strokeLinejoin="round"></path></sc-for></g>
+        </svg>
+        <sc-for list="{{ boxes }}" as="b">
+          <div style="{{ b.style }}">
+            <sc-if value="{{ b.text }}">{{ b.text }}</sc-if>
+            <sc-if value="{{ b.glyph }}"><div style="{{ b.glyph.style }}"><sc-for list="{{ b.glyph.cells }}" as="c"><div style="{{ c.style }}"></div></sc-for></div></sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ ptrStyle }}" hint-placeholder-val="{{ false }}">
+    <svg width="14" height="21" viewBox="0 0 14 21" style="{{ ptrStyle }}"><path d="M1 1 L1 16.5 L4.8 12.9 L7.6 19.2 L10.2 18.1 L7.5 11.9 L12.6 11.9 Z" fill="#000" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round"></path></svg>
+  </sc-if>
+  <sc-if value="{{ canReset }}" hint-placeholder-val="{{ false }}">
+    <div onPointerDown="{{ stop }}" onClick="{{ reset }}" style="position: absolute; right: 12px; bottom: 12px; z-index: 8; padding: 6px 11px; border-radius: 8px; background: rgba(44,44,48,0.85); border: 0.5px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.88); font-size: 12px; font-weight: 500; cursor: pointer;">Reset window</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:300},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;],&quot;default&quot;:&quot;a&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;w&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:420,&quot;tsType&quot;:&quot;number&quot;},&quot;h&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:300,&quot;tsType&quot;:&quot;number&quot;},&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;close&quot;,&quot;screen&quot;],&quot;default&quot;:&quot;close&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;fam&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3,&quot;tsType&quot;:&quot;number&quot;},&quot;cell&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2,&quot;tsType&quot;:&quot;number&quot;},&quot;interactive&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;fanScale&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:null,&quot;tsType&quot;:&quot;number&quot;}}">
+const FAM=[{id:'1/2',cols:2,rows:1},{id:'1/3',cols:3,rows:1},{id:'1/4',cols:2,rows:2},{id:'1/6',cols:3,rows:2}];
+const BLUE='#0A84FF',BASE='#2C2C30',ACT='#48494F',HAIR='0.5px solid rgba(255,255,255,0.16)';
+const FONT='-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, sans-serif';
+const BLUR='blur(24px) saturate(1.6)',D=Math.PI/180,STEP=22.5;
+const V={
+  a:{piv:15,r0:20,R:96,Rx:116,lab:'text',fs:13,act:BLUE,P:{W:112,H:70}},
+  b:{piv:15,r0:20,R:80,Rx:98,lab:'glyph',act:ACT,P:{W:112,H:70}},
+  c:{piv:13,r0:34,R:78,Rx:92,lab:'text',fs:11,act:BLUE,P:{W:96,H:60}}
+};
+V.d=Object.assign({},V.b,{tile:true,pivMark:true});
+V.e=Object.assign({},V.b,{tile:true,edge:true,pivMark:true});
+V.f=Object.assign({},V.b,{tile:true,dock:true,pivMark:true,act:'#3E3F45'});
+const WIN0={x:300,y:170,w:820,h:540},CUR={x:560,y:560};
+const pol=(r,a)=>[r*Math.cos(a*D),r*Math.sin(a*D)];
+const ang=i=>-90+STEP*(i+0.5);
+function blade(r0,R,a0,a1,g){
+  const h=g/2,N=Math.max(10,Math.ceil((a1-a0)/8)),pts=[],dO=Math.asin(Math.min(.99,h/R))/D,dI=Math.asin(Math.min(.99,h/r0))/D;
+  for(let j=0;j<=N;j++)pts.push(pol(R,a0+dO+(a1-a0-2*dO)*j/N));
+  for(let j=0;j<=N;j++)pts.push(pol(r0,a1-dI-(a1-a0-2*dI)*j/N));
+  return 'M'+pts.map(p=>p[0].toFixed(2)+' '+p[1].toFixed(2)).join('L')+'Z';
+}
+function bx(cx,cy,w,h,x){return Object.assign({position:'absolute',left:cx-w/2,top:cy-h/2,width:w,height:h,boxSizing:'border-box'},x||{});}
+function grid(f,hi,W,H,o){
+  const cells=[],cw=(W-2*o.pad-(f.cols-1)*o.gap)/f.cols,ch=(H-2*o.pad-(f.rows-1)*o.gap)/f.rows;
+  for(let i=0;i<f.cols*f.rows;i++){const c=i%f.cols,r=Math.floor(i/f.cols),on=hi==='all'||hi===i||(Array.isArray(hi)&&hi.includes(i));
+    const L=f.cols-1,B=f.rows-1,br=o.rr?[c===0&&r===0,c===L&&r===0,c===L&&r===B,c===0&&r===B].map(x=>(x?o.rr[0]:o.rr[1])+'px').join(' '):o.r;
+    cells.push({style:{position:'absolute',left:o.pad+c*(cw+o.gap),top:o.pad+r*(ch+o.gap),width:cw,height:ch,borderRadius:br,background:on?o.on:o.off,boxShadow:on?'none':(o.sh||'none'),transition:'background 70ms'}});}
+  return {style:Object.assign({position:'absolute',left:0,top:0,width:W,height:H},o.at||{}),cells};
+}
+function panelRect(v,fi){
+  const P=V[v].P,a=ang(fi),sup=Math.abs(Math.cos(a*D))*P.W/2+Math.abs(Math.sin(a*D))*P.H/2;
+  const [cx,cy]=pol(V[v].Rx+(V[v].dock?1:7)+sup,a);return {x:cx-P.W/2,y:cy-P.H/2,w:P.W,h:P.H};
+}
+function build(v,fam,cell,armed){
+  const C=V[v],paths=[],boxes=[];let anchor=null,anchorCell=null;
+  FAM.forEach((f,i)=>{
+    const on=i===fam,a=ang(i),R=on?C.Rx:C.R;
+    paths.push({d:blade(C.r0,R,a-STEP/2,a+STEP/2,6),fill:on?C.act:BASE});
+    if(on&&C.edge)paths.push({d:blade(R-1.5,R,a-STEP/2,a+STEP/2,7),fill:BLUE});
+    const lr=C.r0>=25?(C.r0+R)/2+1:R-(C.lab==='glyph'?19:17);const [x,y]=pol(lr,a);
+    if(C.lab==='text')boxes.push({style:bx(x,y,34,16,{display:'flex',alignItems:'center',justifyContent:'center',font:'600 '+C.fs+'px/1 '+FONT,letterSpacing:'-0.01em',color:on?'#fff':'rgba(255,255,255,0.72)',pointerEvents:'none'}),text:f.id});
+    else boxes.push({style:bx(x,y,18,12),glyph:grid(f,'all',18,12,{pad:0,gap:1.5,r:1.8,rr:C.tile?[3.2,1]:null,on:on?'#fff':'rgba(255,255,255,0.62)',off:'transparent'})});
+    if(on)anchor=pol(lr+4,a);
+  });
+  if(fam>=0){
+    const f=FAM[fam],p=panelRect(v,fam);
+    const g=grid(f,cell,p.w,p.h,{pad:4,gap:C.tile?2.5:3,r:5,rr:C.tile?[8,2.5]:null,on:BLUE,off:'rgba(255,255,255,0.06)',sh:'inset 0 0 0 0.5px rgba(255,255,255,0.12)',at:{left:-0.5,top:-0.5}});
+    boxes.push({style:{position:'absolute',left:p.x,top:p.y,width:p.w,height:p.h,boxSizing:'border-box',borderRadius:C.tile?12:10,background:C.dock?'rgba(62,63,69,0.9)':'rgba(40,40,44,0.82)',border:HAIR,backdropFilter:BLUR,WebkitBackdropFilter:BLUR,boxShadow:'0 10px 28px rgba(0,0,0,0.38)',animation:'otIn 110ms ease-out'},glyph:g});
+    if(cell>=0){const c=g.cells[cell].style;anchor=[p.x+c.left+c.width/2,p.y+c.top+c.height/2];anchorCell={p,c};}
+  }
+  const cancel=fam<0;
+  boxes.push({style:bx(0,0,C.piv*2,C.piv*2,{borderRadius:'50%',background:cancel?'#3A3B40':BASE,border:HAIR,boxShadow:'0 4px 12px rgba(0,0,0,0.35)'})});
+  if(C.pivMark&&cancel&&!armed){const n=13,u=n/3,gp=1.3,o=-n/2;
+    [[0,0,1,0],[2,0,2,0],[2,1,2,1],[1,2,2,2],[0,2,0,2,1],[0,1,0,1]].forEach(([c0,r0,c1,r1,b])=>boxes.push({style:{position:'absolute',left:o+c0*u+gp/2,top:o+r0*u+gp/2,width:(c1-c0+1)*u-gp,height:(r1-r0+1)*u-gp,borderRadius:1,background:b?BLUE:'rgba(255,255,255,0.6)'},keep:true}));}
+  else [45,-45].forEach(r=>boxes.push({style:bx(0,0,C.piv*0.75,1.6,{borderRadius:1,background:cancel?'#fff':'rgba(255,255,255,0.7)',transform:'rotate('+r+'deg)'})}));
+  return {paths,boxes,anchor,anchorCell};
+}
+function hit(v,x,y,fm,sx,sy){
+  const C=V[v],r=Math.hypot(x,y);
+  if(r<C.piv+3)return {fam:-1,cell:-1};
+  if(fm>=0){const f=FAM[fm],p=panelRect(v,fm),m=10;
+    if(x>p.x-m&&x<p.x+p.w+m&&y>p.y-m&&y<p.y+p.h+m){
+      let cx=Math.min(.999,Math.max(0,(x-p.x)/p.w)),cy=Math.min(.999,Math.max(0,(y-p.y)/p.h));
+      if(sx<0)cx=.999-cx;if(sy<0)cy=.999-cy;
+      return {fam:fm,cell:Math.floor(cy*f.rows)*f.cols+Math.floor(cx*f.cols)};}}
+  const a=Math.atan2(y,x)/D;if(a<-110||a>20)return null;
+  const i=Math.max(0,Math.min(3,Math.floor((a+90)/STEP)));
+  if(r<C.Rx+4||fm<0)return {fam:i,cell:-1};
+  return null;
+}
+const ORB=[-90,0,90,180];
+const OV={
+  o:{piv:17,fam:[65,97],cell:[21,60],disc:101,fs:'seg',track:true},
+  p:{piv:14,fam:[58,78],cell:[18,52],disc:84,fs:'node',track:true,g:[16,10]},
+  q:{piv:16,fam:[20,54],cell:[58,98],disc:102,fs:'seg',grow:true},
+  r:{piv:15,fam:[64,88],cell:[20,59],disc:92,fs:'text',track:true}
+};
+OV.s=Object.assign({},OV.o,{split:true});
+OV.t=Object.assign({},OV.p,{orb:[-90,0,90,180,-45],extra:true});
+OV.u=Object.assign({},OV.p,{alt:true});
+const O=OV.o;
+const FAM5=FAM.concat([{id:'2/3',cols:3,rows:1}]);
+OV.w=Object.assign({},OV.o,{orb:[-90,-18,54,126,198],five:true});
+const FAMW=[FAM[0],FAM[1],{id:'2/3',cols:3,rows:1},FAM[2],FAM[3]];
+const FAMC=[FAM[0],FAM[1],FAM[2],{id:'1/5',cols:5,rows:1},FAM[3]];
+OV.c5=Object.assign({},OV.o,{fam:[63,92],orb:[-90,-18,54,126,198],clock:true,ticks:12});
+OV.ch=Object.assign({},OV.o,{fam:[63,92],orb:[-30,0,30,60,90],clock:true,hw:15,hours:true,ticks:12,nearMax:30});
+OV.cd=Object.assign({},OV.o,{fam:[68,92],orb:[-30,0,30,60,90],clock:true,fs:'dial',ticks:60,hand:true,nearMax:30});
+OV.fb=Object.assign({},OV.ch,{bands:[[20,32],[34,46],[48,60]],g:[16,9]});
+OV.fm=Object.assign({},OV.ch,{mod:true});
+OV.fd=Object.assign({},OV.ch,{dwell:true});
+const spansW=(n,w)=>Array.from({length:n-w+1},(_,s)=>Array.from({length:w},(_,j)=>s+j));
+const spansAngles=(sp,cols)=>sp.map(s=>180+180*((s[0]+s[s.length-1])/2)/(cols-1));
+function sectorsFromAngles(as){const n=as.length,arr=as.map((a,k)=>({k,a:(a+360)%360})).sort((p,q)=>p.a-q.a);
+  return arr.map((p,j)=>{const dp=((p.a-arr[(j-1+n)%n].a)+360)%360||360,dn=((arr[(j+1)%n].a-p.a)+360)%360||360;return {k:p.k,a0:p.a-dp/2,a1:p.a+dn/2};}).sort((p,q)=>p.k-q.k);}
+function grow(col,w){if(w<=1)return [col];if(col===2)return [1,2,3];const n=Math.min(w,3);return col<2?Array.from({length:n},(_,j)=>col+j):Array.from({length:n},(_,j)=>col-n+1+j);}
+const famsOf=v=>OV[v]&&OV[v].clock?FAMC:OV[v]&&OV[v].five?FAMW:OV[v]&&OV[v].extra?FAM5:FAM;
+const HALVES=[{span:[0,1],a0:90,a1:270},{span:[1,2],a0:270,a1:450}];
+function positions(v,fi,alt){
+  const C=OV[v],f=famsOf(v)[fi];
+  if(f.id==='1/5'&&C.bands)return [1,2,3].flatMap((w,bi)=>{const sp=spansW(5,w),sec=sectorsFromAngles(spansAngles(sp,5));return sp.map((s,k)=>({span:s,a0:sec[k].a0,a1:sec[k].a1,r0:C.bands[bi][0],r1:C.bands[bi][1]}));});
+  if(f.id==='1/5'&&C.mod){const w=+alt||1,sp=spansW(5,w),sec=sectorsFromAngles(spansAngles(sp,5));return sp.map((s,k)=>({span:s,a0:sec[k].a0,a1:sec[k].a1,r0:C.cell[0],r1:C.cell[1]}));}
+  if(f.id==='2/3')return HALVES.map(h=>Object.assign({r0:C.cell[0],r1:C.cell[1]},h));
+  const base=cellSectors(f).sort((p,q)=>p.i-q.i).map(s=>({span:[s.i],a0:s.a0,a1:s.a1,r0:C.cell[0],r1:C.cell[1]}));
+  if(f.id==='1/3'&&C.split){const mid=(C.cell[0]+C.cell[1])/2;base.forEach(p=>p.r1=mid-1.5);return base.concat(HALVES.map(h=>Object.assign({r0:mid+1.5,r1:C.cell[1]},h)));}
+  if(f.id==='1/3'&&C.alt&&alt){base[0].span=[0,1];base[2].span=[1,2];}
+  return base;
+}
+function selSpan(v,fam,cell,alt,dw){const C=OV[v],f=famsOf(v)[fam];if(C.dwell&&f.id==='1/5'&&dw>1)return grow(cell,dw);return positions(v,fam,alt)[cell].span;}
+function spanTarget(f,span){const cs=span.map(i=>i%f.cols),rs=span.map(i=>Math.floor(i/f.cols)),w=1440/f.cols,h=876/f.rows,c0=Math.min(...cs),c1=Math.max(...cs),r0=Math.min(...rs),r1=Math.max(...rs);return {x:c0*w,y:24+r0*h,w:(c1-c0+1)*w,h:(r1-r0+1)*h};}
+const nd=a=>((a%360)+540)%360-180;
+function cellSectors(f){
+  const n=f.cols*f.rows,arr=[];
+  for(let i=0;i<n;i++){const c=i%f.cols,r=Math.floor(i/f.cols),x=(c+.5)/f.cols-.5,y=(r+.5)/f.rows-.5;
+    let a=f.rows===1?180+180*c/(f.cols-1):Math.atan2(y,x)/D;arr.push({i,a:(a+360)%360});}
+  arr.sort((p,q)=>p.a-q.a);
+  return arr.map((p,k)=>{const dp=((p.a-arr[(k-1+n)%n].a)+360)%360||360,dn=((arr[(k+1)%n].a-p.a)+360)%360||360;return {i:p.i,a0:p.a-dp/2,a1:p.a+dn/2};});
+}
+function buildOrbit(v,fam,cell,armed,alt,dw){
+  const C=OV[v],paths=[],boxes=[],under=[],fams=famsOf(v),orb=C.orb||ORB,hw=C.hw||180/fams.length;let anchor=null;
+  if(C.ticks){const R=C.disc-4;for(let k=0;k<C.ticks;k++){const a=-90+360*k/C.ticks,hr=C.ticks===60?k%5===0:true,len=hr?6:3;const [x,y]=pol(R-len/2,a);under.push({style:bx(x,y,len,hr?1.5:1,{background:'rgba(255,255,255,'+(hr?0.38:0.16)+')',transform:'rotate('+a+'deg)'})});}}
+  if(C.hours){for(let h=0;h<12;h++){const a=-90+30*h;if(!orb.some(o=>Math.abs(nd(o-a))<1))paths.push({d:blade(C.fam[0],C.fam[1],a-15,a+15,6),fill:'#212124'});}}
+  if(C.hand&&fam>=0){const a=orb[fam];boxes.push({style:{position:'absolute',left:0,top:-0.75,width:C.fam[0]-6,height:1.5,borderRadius:1,background:BLUE,transformOrigin:'0 50%',transform:'rotate('+a+'deg)'}});}
+  const fm=(C.fam[0]+C.fam[1])/2,cm=(C.cell[0]+C.cell[1])/2,[gw,gh]=C.g||[18,12];
+  const dr=C.grow&&fam<0?C.fam[1]+4:C.disc;
+  under.unshift({style:bx(0,0,dr*2,dr*2,{borderRadius:'50%',background:'rgba(22,22,25,0.86)',border:HAIR,backdropFilter:BLUR,WebkitBackdropFilter:BLUR,boxShadow:'0 14px 36px rgba(0,0,0,0.45)',transition:'all 120ms cubic-bezier(.2,.9,.3,1)'})});
+  if(C.track&&fam<0)under.push({style:bx(0,0,cm*2,cm*2,{borderRadius:'50%',border:'1px dashed rgba(255,255,255,0.16)'})});
+  if(C.fs==='node')under.push({style:bx(0,0,fm*2,fm*2,{borderRadius:'50%',border:'1px solid rgba(255,255,255,0.1)'})});
+  fams.forEach((f,i)=>{const on=i===fam,a=orb[i];const [x,y]=pol(fm,a);const fh=f.id==='2/3'?[0,1]:'all';
+    if(C.fs==='dial'){
+      boxes.push({style:bx(x,y,on?40:36,22,{display:'flex',alignItems:'center',justifyContent:'center',borderRadius:11,font:'600 13px/1 '+FONT,letterSpacing:'-0.01em',background:on?BLUE:'transparent',color:on?'#fff':'rgba(255,255,255,0.78)',transition:'background 80ms'}),text:f.id});
+    }else if(C.fs==='node'){
+      boxes.push({style:bx(x,y,30,22,{borderRadius:7,background:on?'#3E3F45':'#2A2A2E',border:on?'1.5px solid '+BLUE:HAIR,boxShadow:'0 3px 10px rgba(0,0,0,0.35)'}),glyph:grid(f,fh,gw,gh,{pad:0,gap:1.3,r:1.6,rr:[3,1],on:on?'#fff':'rgba(255,255,255,0.65)',off:'rgba(255,255,255,0.18)',at:{left:(30-gw)/2-(on?1.5:0.5),top:(22-gh)/2-(on?1.5:0.5)}})});
+    }else{
+      paths.push({d:blade(C.fam[0],C.fam[1],a-hw,a+hw,6),fill:on?'#3E3F45':'#2A2A2E'});
+      if(on)paths.push({d:blade(C.fam[1]-1.5,C.fam[1],a-hw,a+hw,7),fill:BLUE});
+      if(C.fs==='text')boxes.push({style:bx(x,y,34,16,{display:'flex',alignItems:'center',justifyContent:'center',font:'600 12px/1 '+FONT,letterSpacing:'-0.01em',color:on?'#fff':'rgba(255,255,255,0.7)'}),text:f.id});
+      else boxes.push({style:bx(x,y,20,13),glyph:grid(f,fh,20,13,{pad:0,gap:1.5,r:1.8,rr:[3.2,1],on:on?'#fff':'rgba(255,255,255,0.62)',off:'rgba(255,255,255,0.18)'})});
+    }
+    if(on)anchor=pol(fm+3,a);});
+  const dws=(fam>=0&&cell>=0&&C.dwell&&fams[fam].id==='1/5'&&dw>1)?grow(cell,dw):null;
+  if(fam>=0){const f=fams[fam];positions(v,fam,alt).forEach((s,k)=>{const sel=dws?dws.includes(s.span[0]):k===cell,m=(s.a0+s.a1)/2,pr=(s.r0+s.r1)/2;
+    paths.push({d:blade(s.r0,s.r1,s.a0,s.a1,5),fill:sel?BLUE:'#3A3A40',sw:3});
+    const [x,y]=pol(pr,m);
+    boxes.push({style:Object.assign(bx(x,y,gw,gh),{animation:'otIn 110ms ease-out'}),glyph:grid(f,sel&&dws?dws:s.span,gw,gh,{pad:0,gap:1.3,r:1.6,rr:[3,1],on:'#fff',off:sel?'rgba(255,255,255,0.35)':'rgba(255,255,255,0.2)'})});
+    if(sel&&(!dws||k===cell))anchor=pol(pr+3,m);});
+    if(C.mod&&f.id==='1/5')boxes.push({style:bx(0,C.disc+18,96,22,{borderRadius:7,display:'flex',alignItems:'center',justifyContent:'center',font:'600 12px/1 '+FONT,background:(+alt||1)>1?BLUE:'rgba(40,40,44,0.9)',border:HAIR,color:'#fff'}),text:'⌥  '+(+alt||1)+'/5'});
+    if(C.alt&&f.id==='1/3')boxes.push({style:bx(0,C.disc+18,84,22,{borderRadius:7,display:'flex',alignItems:'center',justifyContent:'center',font:'600 12px/1 '+FONT,background:alt?BLUE:'rgba(40,40,44,0.9)',border:HAIR,color:alt?'#fff':'rgba(255,255,255,0.75)'}),text:alt?'⌥  2/3':'Hold ⌥ · 2/3'});}
+  boxes.push({style:bx(0,0,C.piv*2,C.piv*2,{borderRadius:'50%',background:'#1A1A1D',border:HAIR})});
+  if(fam<0&&!armed){const n=C.piv*0.76,u=n/3,gp=1.3,o=-n/2;
+    [[0,0,1,0],[2,0,2,0],[2,1,2,1],[1,2,2,2],[0,2,0,2,1],[0,1,0,1]].forEach(([c0,r0,c1,r1,b])=>boxes.push({style:{position:'absolute',left:o+c0*u+gp/2,top:o+r0*u+gp/2,width:(c1-c0+1)*u-gp,height:(r1-r0+1)*u-gp,borderRadius:1,background:b?BLUE:'rgba(255,255,255,0.6)'}}));}
+  else if(C.dwell&&fam>=0&&cell>=0&&fams[fam].id==='1/5')boxes.push({style:bx(0,0,C.piv*2,C.piv*2,{display:'flex',alignItems:'center',justifyContent:'center',font:'700 11px/1 '+FONT,color:'#fff',borderRadius:'50%',border:'1.5px solid '+BLUE}),text:(dws?dws.length:1)+'/5'});
+  else [45,-45].forEach(r=>boxes.push({style:bx(0,0,C.piv*0.76,1.6,{borderRadius:1,background:'rgba(255,255,255,0.8)',transform:'rotate('+r+'deg)'})}));
+  return {paths,boxes,under,anchor};
+}
+function hitOrbit(v,x,y,fm,alt){
+  const C=OV[v],r=Math.hypot(x,y);if(r<C.piv+2)return {fam:fm,cell:-1};
+  const a=(Math.atan2(y,x)/D+360)%360;
+  const famOuter=C.fam[0]>C.cell[0],b=famOuter?(C.cell[1]+C.fam[0])/2:(C.fam[1]+C.cell[0])/2;
+  const inCell=famOuter?r<b:r>=b;
+  if(inCell&&fm>=0){let bk=-1,bd2=1e9;positions(v,fm,alt).forEach((s,k)=>{if(((a-s.a0)%360+360)%360<s.a1-s.a0){const d=Math.abs(r-(s.r0+s.r1)/2);if(d<bd2){bd2=d;bk=k;}}});return bk>=0?{fam:fm,cell:bk}:null;}
+  if(inCell&&famOuter)return null;
+  let best=0,bd=999;(C.orb||ORB).forEach((o,i)=>{const d=Math.abs(nd(a-o));if(d<bd){bd=d;best=i;}});
+  if(C.nearMax&&bd>C.nearMax)return null;
+  return {fam:best,cell:-1};
+}
+function target(fi,ci){const f=FAM[fi],c=ci%f.cols,r=Math.floor(ci/f.cols),w=1440/f.cols,h=876/f.rows;return {x:c*w,y:24+r*h,w,h};}
+class Component extends DCLogic {
+  state={open:false,fam:-1,cell:-1,ox:0,oy:0,win:null};
+  stageRef=React.createRef();
+  componentDidMount(){this.onKey=e=>{if(e.key==='Escape'&&this.state.open)this.setState({open:false,fam:-1,cell:-1});};window.addEventListener('keydown',this.onKey);this.onAlt=e=>{if(e.key!=='Alt')return;e.preventDefault();const C=OV[this.props.variant];if(C&&C.mod){if(e.type==='keydown'&&!e.repeat)this.setState(s=>{const w=((+s.alt||1)%3)+1;return {alt:w,cell:s.cell>=0?Math.min(s.cell,5-w):-1};});}else this.setState({alt:e.type==='keydown'});};window.addEventListener('keydown',this.onAlt);window.addEventListener('keyup',this.onAlt);}
+  dwStep(){this.dt=setTimeout(()=>{const s=this.state;if(!s.open||s.cell<0)return;const nw=s.cell===2?3:Math.min(3,(s.dw||1)+1);this.setState({dw:nw});if(nw<3)this.dwStep();},550);}
+  componentWillUnmount(){clearTimeout(this.dt);window.removeEventListener('keydown',this.onKey);window.removeEventListener('keydown',this.onAlt);window.removeEventListener('keyup',this.onAlt);}
+  cfg(){const p=this.props,W=+p.w||420,H=+p.h||300,mode=p.mode||'close',s=mode==='screen'?W/1440:1;
+    return {p,W,H,mode,s,fs:p.fanScale!=null?+p.fanScale:s,v:(V[p.variant]||OV[p.variant])?p.variant:'a',inter:!!p.interactive};}
+  pt(e){const r=this.stageRef.current.getBoundingClientRect(),k=r.width/this.cfg().W;return [(e.clientX-r.left)/k,(e.clientY-r.top)/k];}
+  renderVals(){
+    const {p,W,H,mode,s,fs,v,inter}=this.cfg(),isScreen=mode==='screen';
+    let open,fam,cell,ox,oy;
+    if(inter)({open,fam,cell,ox,oy}=this.state);
+    else{open=true;fam=p.fam!=null?+p.fam:-1;cell=p.cell!=null?+p.cell:-1;
+      if(isScreen){ox=CUR.x*s;oy=CUR.y*s;}else if(OV[v]){ox=W/2;oy=H/2;}else{ox=Math.round(W*(p.flipX?0.71:0.29));oy=Math.round(H*(p.flipY?0.26:0.74));}}
+    let sx,sy;
+    if(inter){sx=this.state.sx||1;sy=this.state.sy||1;}else{sx=p.flipX?-1:1;sy=p.flipY?-1:1;}
+    if(OV[v]){sx=1;sy=1;}
+    const armed=inter?this.state.armed:!!p.armed;
+    const alt=inter?(this.state.alt||false):(p.alt==null?false:(typeof p.alt==='boolean'?p.alt:+p.alt));const dw=inter?(this.state.dw||1):(+p.dw||1);
+    const g=OV[v]?buildOrbit(v,fam,cell,armed,alt,dw):build(v,fam,cell,armed);
+    g.paths=g.paths.map(q=>Object.assign({sw:4},q));
+    if(sx<0||sy<0){
+      g.boxes=g.boxes.map(b=>{if(b.keep)return b;const st=Object.assign({},b.style);
+        if(sx<0)st.left=-(st.left+st.width);if(sy<0)st.top=-(st.top+st.height);return Object.assign({},b,{style:st});});
+      if(g.anchorCell){const {p:pr,c}=g.anchorCell;const px=sx<0?-(pr.x+pr.w):pr.x,py=sy<0?-(pr.y+pr.h):pr.y;g.anchor=[px+c.left+c.width/2,py+c.top+c.height/2];}
+      else if(g.anchor)g.anchor=[g.anchor[0]*sx,g.anchor[1]*sy];
+    }
+    const base={background:'#1E1E20',border:'0.5px solid rgba(255,255,255,0.14)',boxShadow:'0 20px 50px rgba(0,0,0,0.45)',overflow:'hidden',display:'flex',flexDirection:'column',boxSizing:'border-box',zIndex:1};
+    const ease='cubic-bezier(.2,.8,.2,1)';
+    let winStyle;
+    if(isScreen){const w=this.state.win||WIN0;winStyle=Object.assign({position:'absolute',left:w.x*s,top:w.y*s,width:w.w*s,height:w.h*s,borderRadius:14*s,transition:['left','top','width','height'].map(k=>k+' 220ms '+ease).join(',')},base);}
+    else winStyle=Object.assign({position:'absolute',left:16,top:16,width:W+40,height:H+40,borderRadius:14},base);
+    let previewStyle=null;
+    if(isScreen&&open&&fam>=0&&cell>=0){const t=OV[v]?spanTarget(famsOf(v)[fam],selSpan(v,fam,cell,alt,dw)):target(fam,cell),i=6;
+      previewStyle={position:'absolute',left:(t.x+i)*s,top:(t.y+i)*s,width:(t.w-2*i)*s,height:(t.h-2*i)*s,boxSizing:'border-box',borderRadius:12*s,background:'rgba(10,132,255,0.2)',border:'1px solid rgba(10,132,255,0.85)',boxShadow:'inset 0 0 0 0.5px rgba(255,255,255,0.22)',transition:'all 90ms '+ease,pointerEvents:'none',zIndex:3};}
+    const ptrStyle=(!inter&&p.pointer!==false&&g.anchor)?{position:'absolute',left:ox+g.anchor[0]*fs,top:oy+g.anchor[1]*fs,transform:'scale('+fs+')',transformOrigin:'0 0',zIndex:6,pointerEvents:'none',overflow:'visible'}:null;
+    const reset0={open:false,fam:-1,cell:-1};
+    return {
+      gT:'scale('+sx+' '+sy+')',under:g.under||[],
+      stageRef:this.stageRef,isScreen,winStyle,previewStyle,open,ptrStyle,paths:g.paths,boxes:g.boxes,
+      stageStyle:{position:'relative',width:W,height:H,overflow:'hidden',background:'linear-gradient(165deg,#30343A 0%,#1F2226 100%)','--s':s,fontFamily:FONT,userSelect:'none',WebkitUserSelect:'none',touchAction:'none',cursor:'default'},
+      fanStyle:{position:'absolute',left:ox,top:oy,width:0,height:0,transform:'scale('+fs+')',transformOrigin:'0 0',pointerEvents:'none',zIndex:5},
+      mbIcon:Math.max(7,Math.round(15*s)),markVariant:p.markVariant||'grid',
+      canReset:inter&&!!this.state.win,
+      reset:()=>this.setState({win:null}),
+      stop:e=>e.stopPropagation(),
+      md:e=>{if(inter&&e.button===1)e.preventDefault();},
+      ctx:e=>{if(inter)e.preventDefault();},
+      down:e=>{if(!inter||e.button===2)return;e.preventDefault();const [x,y]=this.pt(e);try{e.currentTarget.setPointerCapture(e.pointerId);}catch(_){}const top=isScreen?24*s:0;
+        if(OV[v]){const R=(OV[v].disc+6)*fs;const cx=Math.min(Math.max(x,R),W-R),cy=Math.min(Math.max(y,top+R),H-R);this.setState({open:true,fam:-1,cell:-1,ox:cx,oy:cy,armed:false,sx:1,sy:1});return;}
+        const nx=(x+250*fs>W)&&(x-250*fs>=0)?-1:1,ny=(y-190*fs<top)?-1:1;
+        this.setState({open:true,fam:-1,cell:-1,ox:x,oy:y,armed:false,sx:nx,sy:ny});},
+      move:e=>{const st=this.state;if(!inter||!st.open)return;const [x,y]=this.pt(e);const h=OV[v]?hitOrbit(v,(x-st.ox)/fs,(y-st.oy)/fs,st.fam,st.alt||false):hit(v,(x-st.ox)/fs*(st.sx||1),(y-st.oy)/fs*(st.sy||1),st.fam,st.sx||1,st.sy||1);if(h&&(h.fam!==st.fam||h.cell!==st.cell)){this.setState(h.fam>=0?Object.assign({armed:true,dw:1},h):Object.assign({dw:1},h));if(OV[v]&&OV[v].dwell){clearTimeout(this.dt);if(h.cell>=0&&famsOf(v)[h.fam].id==='1/5')this.dwStep();}}},
+      up:()=>{const st=this.state;if(!inter||!st.open)return;
+        if(st.fam>=0&&st.cell>=0&&isScreen)this.setState(Object.assign({},reset0,{win:OV[v]?spanTarget(famsOf(v)[st.fam],selSpan(v,st.fam,st.cell,st.alt||false,st.dw||1)):target(st.fam,st.cell)}));else this.setState(reset0);}
+    };
+  }
+}
+</script>
+</body>
+</html>

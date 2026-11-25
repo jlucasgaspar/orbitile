@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><style>body{margin:0;background:#ECEBE7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,sans-serif;color:#1a1a1a}a{color:#0A6FD6}a:hover{color:#0857A8}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 12px/1.4 system-ui,sans-serif;color:rgba(0,0,0,.6)}.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}</style></helmet>
+<section class="dv-turn" id="t12">
+  <div class="dv-thd"><a class="dv-tid" href="#t12">12</a><span class="dv-tname"><a class="dv-oid" href="#11a">11a</a> com 8 no lugar de 10</span></div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="12a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#12a">12a</a><span><b style="color:#1a1a1a; font-weight:600;">2 · 4 · 6 · 8</b> — o setor da esquerda passa a ser 4 + 4. Cada célula fica com 1/8 da tela, e um merge de duas células dá 1/4 de largura.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4a8" w="420" h="300" fam="3" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Aberto em 8</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4a8" w="420" h="300" fam="3" sel="1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Um clique: 1/8</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4a8" w="420" h="300" fam="3" sel="1,2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Arraste: 2 células = 1/4 de largura</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="r4a8" w="420" h="263" mode="screen" fam="3" sel="1,6" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Arraste 2 × 2: metade central</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Células ≈ 22 × 28 pt na mini-tela, maiores que as de 10</span><span>8 combina com 2 e 4: todo merge dá frações simples</span><span>Teclas 2 4 6 8</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — clique na janela para abrir. Passe o mouse pelas famílias; clique numa célula ou arraste entre várias e solte. Esc ou clique fora fecha.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Merge" variant="r4a8" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="dv-turn" id="t11">
+  <div class="dv-thd"><a class="dv-tid" href="#t11">11</a><span class="dv-tname">Três UIs a partir de <a class="dv-oid" href="#10a">10a</a> com o anel de <a class="dv-oid" href="#6a">6a</a> — 2 · 4 · 6 · 10, em sentido horário a partir do meio-dia</span></div>
+  <div style="max-width: 900px; margin: 0 0 20px; font-size: 13px; line-height: 1.55; color: rgba(0,0,0,0.66); text-wrap: pretty;">O anel externo é o mesmo de <a class="dv-oid" href="#6a">6a</a>, com tiles, glyphs de layout e filete azul. As famílias agora são contagens: <b>2</b> (1 + 1), <b>4</b> (2 + 2), <b>6</b> (3 + 3) e <b>10</b> (5 + 5). A lógica do centro não mudou: hover troca a grade, um clique aplica e arrastar faz merge, que é aplicado ao soltar.</div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="11a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#11a">11a</a><span><b style="color:#1a1a1a; font-weight:600;">Anel 6a + grade</b> — o centro é uma mini-tela com a grade.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4a" w="420" h="300" fam="3" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Aberto em 10</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4a" w="420" h="300" fam="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Hover em 6: o centro vira 3 + 3</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4a" w="420" h="300" fam="3" sel="0,1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Arraste sobre duas células</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="r4a" w="420" h="263" mode="screen" fam="3" sel="1,7" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Arraste vertical com preview</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Ø 202 pt</span><span>O merge fica óbvio na grade retangular</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — clique na janela para abrir. Passe o mouse pelas famílias; clique numa célula ou arraste entre várias e solte. Esc ou clique fora fecha.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Merge" variant="r4a" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="11b">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#11b">11b</a><span><b style="color:#1a1a1a; font-weight:600;">6a puro</b> — o anel interno de <a class="dv-oid" href="#6a">6a</a> sem alterações: cada posição é um setor apontando para onde a janela vai. O merge por arraste pinta todos os setores incluídos, e o pivô × fecha o menu.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4b" w="420" h="300" fam="3" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Aberto em 10</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4b" w="420" h="300" fam="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Hover em 6: o centro vira 3 + 3</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4b" w="420" h="300" fam="3" sel="0,1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Arraste sobre duas células</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="r4b" w="420" h="263" mode="screen" fam="3" sel="1,7" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Arraste vertical com preview</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Ø 202 pt</span><span>O visual mais coerente com a órbita</span><span>O merge lê menos que numa grade</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — clique na janela para abrir. Passe o mouse pelas famílias; clique numa célula ou arraste entre várias e solte. Esc ou clique fora fecha.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Merge" variant="r4b" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="11c">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#11c">11c</a><span><b style="color:#1a1a1a; font-weight:600;">Anel 6a + tela com a janela atual</b> — como <a class="dv-oid" href="#11a">11a</a>, mas a mini-tela ganha uma barra de menu e um contorno tracejado da janela onde ela está agora. Uma contagem (ex.: 2/10) aparece acima.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4c" w="420" h="300" fam="3" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Aberto em 10</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4c" w="420" h="300" fam="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Hover em 6: o centro vira 3 + 3</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="r4c" w="420" h="300" fam="3" sel="0,1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Arraste sobre duas células</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="r4c" w="420" h="263" mode="screen" fam="3" sel="1,7" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Arraste vertical com preview</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Ø 202 pt</span><span>Mostra a posição atual e o destino</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — clique na janela para abrir. Passe o mouse pelas famílias; clique numa célula ou arraste entre várias e solte. Esc ou clique fora fecha.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Merge" variant="r4c" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Tente: "<a class="dv-oid" href="#11c">11c</a> sem o contorno da janela atual" · "<a class="dv-oid" href="#11b">11b</a> com o merge desenhado como um único setor" · "abrir já no gesto de segurar"</p>
+</section>
+<section class="dv-turn" id="t10">
+  <div class="dv-thd"><a class="dv-tid" href="#t10">10</a><span class="dv-tname"><a class="dv-oid" href="#9a">9a</a> com porcentagens, hover e arraste</span></div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="10a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#10a">10a</a><span><b style="color:#1a1a1a; font-weight:600;">Órbita em %</b> — passar o mouse sobre 50%, 33%, 25%, 20% ou 10% já troca a grade do centro, e o número em foco ganha uma pílula. Clicar numa célula aplica na hora. Arrastar entre células faz o merge, e soltar aplica.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="orbit2" w="420" h="300" fam="4" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Aberto em 10%</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="orbit2" w="420" h="300" fam="1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Hover em 33%: o centro vira terços</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="orbit2" w="420" h="300" fam="4" sel="0,1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Arraste sobre duas células: 20%</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="orbit2" w="420" h="263" mode="screen" fam="4" sel="1,7" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Arraste vertical (40%) com preview</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Sem botão Apply</span><span>Soltar fora das células desfaz a seleção</span><span>Teclas 2 3 4 5 0 trocam a porcentagem</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — clique na janela para abrir. Passe o mouse sobre as porcentagens; clique numa célula ou arraste entre várias e solte. Esc ou clique fora fecha.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Merge" variant="orbit2" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Tente: "incluir 17% (1/6)" · "manter a última % ao reabrir" · "abrir já no gesto de segurar, sem clique extra"</p>
+</section>
+<section class="dv-turn" id="t9">
+  <div class="dv-thd"><a class="dv-tid" href="#t9">9</a><span class="dv-tname">Fora da caixa — escolher células e fazer merge</span></div>
+  <div style="max-width: 900px; margin: 0 0 20px; font-size: 13px; line-height: 1.6; color: rgba(0,0,0,0.7); text-wrap: pretty; display: flex; flex-direction: column; gap: 6px;">
+    <div>As famílias deixam de ser destinos e passam a ser a <b>resolução do grid</b>: 1/2, 1/3, 1/4, 1/6 e 1/10 (5 × 2). Um clique escolhe uma célula. Clicar em outra une as duas pelo menor retângulo que contém ambas, então 1/10 + 1/10 vira 1/5 e duas células empilhadas viram uma coluna. <b>Apply</b> confirma.</div>
+    <div>Regras de clique: clicar dentro do merge recomeça a seleção a partir daquela célula; clicar de novo numa célula sozinha a desmarca. Arrastar sobre o grid faz o mesmo merge de forma contínua.</div>
+  </div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="9a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#9a">9a</a><span><b style="color:#1a1a1a; font-weight:600;">Órbita com grade</b> — mantém a identidade da órbita. O anel externo troca a resolução: 1/2 ao meio-dia, depois 1/3, 1/4, 1/6 e 1/10 a cada 72°. O centro vira uma mini-tela clicável, com o resultado acima e Apply abaixo.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;"><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="orbit" w="420" h="300" fam="4" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Aberto em 1/10</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="orbit" w="420" h="300" fam="4" sel="0" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Um clique: 1/10</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="orbit" w="420" h="300" fam="4" sel="0,1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Segundo clique: merge 1/10 + 1/10 = 1/5</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="orbit" w="420" h="263" mode="screen" fam="4" sel="1,7" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Merge vertical (2/5 de largura) com preview</div></div></div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Ø 226 pt</span><span>O mais compacto</span><span>Cada célula de 1/10 tem ≈ 22 × 36 pt</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — clique na janela para abrir. Clique numa célula; clique em outra para fazer o merge (ou arraste sobre o grid). Apply ou Return aplica · Esc ou clique fora cancela · teclas 2 3 4 6 0 trocam a família.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Merge" variant="orbit" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="9b">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#9b">9b</a><span><b style="color:#1a1a1a; font-weight:600;">Painel de grade</b> — um popover no padrão do macOS: controle segmentado com as famílias, uma grade grande e um rodapé com o tamanho resultante, Cancel e Apply.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;"><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="panel" w="420" h="300" fam="4" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Aberto em 1/10</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="panel" w="420" h="300" fam="4" sel="0" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Um clique: 1/10</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Merge" variant="panel" w="420" h="300" fam="4" sel="0,1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Segundo clique: merge 1/10 + 1/10 = 1/5</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="panel" w="420" h="263" mode="screen" fam="4" sel="1,7" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Merge vertical (2/5 de largura) com preview</div></div></div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>300 × 266 pt</span><span>Células grandes, leitura imediata</span><span>Visual menos próprio do Orbitile</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — clique na janela para abrir. Clique numa célula; clique em outra para fazer o merge (ou arraste sobre o grid). Apply ou Return aplica · Esc ou clique fora cancela · teclas 2 3 4 6 0 trocam a família.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Merge" variant="panel" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="9c">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#9c">9c</a><span><b style="color:#1a1a1a; font-weight:600;">Grade na tela</b> — a grade aparece sobre a tela inteira e você clica no destino real. O tamanho resultante fica escrito dentro da área selecionada. Um HUD pequeno junto ao cursor troca a família e confirma.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;"><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="screen" w="420" h="263" mode="screen" fam="4" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Aberto em 1/10 — o grid é a própria tela</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="screen" w="420" h="263" mode="screen" fam="4" sel="0" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Um clique: 1/10</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="screen" w="420" h="263" mode="screen" fam="4" sel="0,1" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Merge 1/10 + 1/10</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Merge" variant="screen" w="420" h="263" mode="screen" fam="4" sel="1,7" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Merge vertical: 2/5 de largura</div></div></div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Sem tradução: o que você clica é o destino</span><span>Alvos enormes</span><span>Pede deslocamentos maiores do mouse</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — clique na janela para abrir. Clique numa célula; clique em outra para fazer o merge (ou arraste sobre o grid). Apply ou Return aplica · Esc ou clique fora cancela · teclas 2 3 4 6 0 trocam a família.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Merge" variant="screen" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin: 24px 0 0; max-width: 900px; font-size: 13px; line-height: 1.6; color: rgba(0,0,0,0.72); text-wrap: pretty;"><b>Proposta:</b> o mesmo botão com dois modos, separados pela duração do toque. <b>Segurar e arrastar</b> abre a órbita de gesto contínuo (<a class="dv-oid" href="#7b">7b</a>) para os encaixes do dia a dia. <b>Clicar e soltar</b> abre o modo merge (<a class="dv-oid" href="#9c">9c</a>, ou <a class="dv-oid" href="#9a">9a</a> se o espaço contar mais) para montar tamanhos sob medida. Um merge usado com frequência pode virar um layout salvo depois do MVP.</div>
+  <p class="dv-next">Tente: "<a class="dv-oid" href="#9a">9a</a> com Apply no centro" · "<a class="dv-oid" href="#9c">9c</a> com merge por shift-click" · "protótipo dos dois modos no mesmo botão"</p>
+</section>
+<section class="dv-turn" id="t8">
+  <div class="dv-thd"><a class="dv-tid" href="#t8">8</a><span class="dv-tname">1/5 → 2/5 → 3/5 — sobre <a class="dv-oid" href="#7b">7b</a></span></div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="8a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#8a">8a</a><span><b style="color:#1a1a1a; font-weight:600;">Três faixas</b> — a regra de <a class="dv-oid" href="#5a">5a</a> aplicada aos quintos. A faixa perto do pivô tem os cinco 1/5, a do meio tem os quatro 2/5 e a de fora tem os três 3/5. Mais longe do centro = janela mais larga.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;"><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="fb" w="420" h="300" fam="3" armed="{{ true }}" cell="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · 1/5 apontada — três faixas</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="fb" w="420" h="300" fam="3" armed="{{ true }}" cell="5" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 2/5 esquerda (faixa do meio)</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="fb" w="420" h="300" fam="3" armed="{{ true }}" cell="10" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · 3/5 central (faixa externa)</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="fb" w="420" h="263" mode="screen" fam="3" armed="{{ true }}" cell="10" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview 3/5 central</div></div></div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>12 posições sem tecla nem espera</span><span>Faixas de 12 pt pedem mais precisão</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — aponte 1/5 (5h) e volte: faixa interna 1/5, do meio 2/5, externa 3/5.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="fb" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="8b">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#8b">8b</a><span><b style="color:#1a1a1a; font-weight:600;">⌥ cicla a largura</b> — o anel mostra uma largura por vez. Cada toque em ⌥ durante o gesto troca 1/5 → 2/5 → 3/5 → 1/5, e as fatias se redistribuem. Um selo abaixo do disco mostra o estado.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;"><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="fm" w="420" h="300" fam="3" armed="{{ true }}" cell="0" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · 1/5 esquerda</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="fm" w="420" h="300" fam="3" armed="{{ true }}" cell="0" alt="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · ⌥ uma vez: 2/5</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="fm" w="420" h="300" fam="3" armed="{{ true }}" cell="1" alt="3" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · ⌥ duas vezes: 3/5 central</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="fm" w="420" h="263" mode="screen" fam="3" armed="{{ true }}" cell="0" alt="2" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview 2/5 esquerda</div></div></div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Alvos grandes, ring limpo</span><span>Usa as duas mãos</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — em 1/5, toque ⌥ (Option) para alternar 1/5 → 2/5 → 3/5.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="fm" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="8c">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#8c">8c</a><span><b style="color:#1a1a1a; font-weight:600;">Segurar para alargar</b> — a ideia mais "relógio": parar sobre um quinto faz a seleção crescer com o tempo, de 1/5 para 2/5 e depois para 3/5, sempre em direção ao centro da tela. O pivô mostra a fração atual.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;"><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="fd" w="420" h="300" fam="3" armed="{{ true }}" cell="0" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · 1/5 esquerda</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="fd" w="420" h="300" fam="3" armed="{{ true }}" cell="0" dw="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Após ~0,5 s: 2/5</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="fd" w="420" h="300" fam="3" armed="{{ true }}" cell="0" dw="3" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Após ~1 s: 3/5</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="fd" w="420" h="263" mode="screen" fam="3" armed="{{ true }}" cell="0" dw="3" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview 3/5 esquerda</div></div></div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Uma mão, sem tecla</span><span>Custa tempo; o centro pula direto para 3/5</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — em 1/5, pare sobre um quinto e espere: ele cresce para 2/5 e 3/5.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="fd" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin: 24px 0 0; max-width: 900px; font-size: 13px; line-height: 1.6; color: rgba(0,0,0,0.72); text-wrap: pretty;">Recomendo <a class="dv-oid" href="#8b">8b</a> como atalho principal: as fatias continuam grandes e a regra de ⌥ vale para qualquer família, servindo também para 2/3 em 1/3 e 3/4 em 1/4. <a class="dv-oid" href="#8c">8c</a> é um bom complemento para quem usa só o mouse. <a class="dv-oid" href="#8a">8a</a> é o mais rápido para usuários experientes, mas o mais exigente em precisão.</div>
+  <p class="dv-next">Tente: "<a class="dv-oid" href="#8b">8b</a> aplicando ⌥ a todas as famílias" · "<a class="dv-oid" href="#8c">8c</a> com anel de progresso no pivô" · "scroll do mouse para mudar a largura"</p>
+</section>
+<section class="dv-turn" id="t7">
+  <div class="dv-thd"><a class="dv-tid" href="#t7">7</a><span class="dv-tname">Relógio — 1/2 · 1/3 · 1/4 · 1/5 · 1/6</span></div>
+  <div style="max-width: 900px; margin: 0 0 20px; font-size: 13px; line-height: 1.55; color: rgba(0,0,0,0.66); text-wrap: pretty;">1/5 entra como cinco colunas. Nas famílias de uma linha (1/2, 1/3, 1/5), as posições se espalham pelo arco superior do anel interno, da esquerda para a direita, passando pelo meio-dia.</div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="7a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#7a">7a</a><span><b style="color:#1a1a1a; font-weight:600;">Cinco setores</b> — a UI de <a class="dv-oid" href="#6a">6a</a> com marcas de hora na borda. 1/2 fica ao meio-dia e as outras famílias seguem no sentido horário, a cada 72°.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="c5" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="c5" w="420" h="300" fam="3" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/5 apontada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="c5" w="420" h="300" fam="3" cell="1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Segundo quinto selecionado</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="c5" w="420" h="263" mode="screen" fam="3" cell="1" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Alvos maiores (72°)</span><span>Ângulos sem relação com o relógio real</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione, aponte a família, volte para a posição e solte. Pivô ou Esc cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="c5" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="7b">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#7b">7b</a><span><b style="color:#1a1a1a; font-weight:600;">Denominador = hora</b> — 1/2 às 2h, 1/3 às 3h, 1/4 às 4h, 1/5 às 5h, 1/6 às 6h. As outras horas aparecem como tiles vazios, e o anel lê como um mostrador. O próprio número diz para onde ir.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="ch" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="ch" w="420" h="300" fam="3" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/5 apontada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="ch" w="420" h="300" fam="3" cell="1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Segundo quinto selecionado</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="ch" w="420" h="263" mode="screen" fam="3" cell="1" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Nada para decorar: a fração indica a hora</span><span>Alvos de 30°, mais estreitos</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione, aponte a família, volte para a posição e solte. Pivô ou Esc cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="ch" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="7c">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#7c">7c</a><span><b style="color:#1a1a1a; font-weight:600;">Mostrador com ponteiro</b> — mesmas horas de <a class="dv-oid" href="#7b">7b</a>, sem segmentos: um mostrador com 60 marcas e as frações no lugar dos números. Um ponteiro azul indica a família ativa.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="cd" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="cd" w="420" h="300" fam="3" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/5 apontada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="cd" w="420" h="300" fam="3" cell="1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Segundo quinto selecionado</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="cd" w="420" h="263" mode="screen" fam="3" cell="1" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>O visual mais "relógio" e o mais leve</span><span>Os rótulos precisam ser lidos</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione, aponte a família, volte para a posição e solte. Pivô ou Esc cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="cd" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin: 24px 0 0; max-width: 900px; font-size: 13px; line-height: 1.6; color: rgba(0,0,0,0.72); text-wrap: pretty;">Recomendo <a class="dv-oid" href="#7b">7b</a>: "1/4 = 4 horas" é uma regra que o usuário aprende em segundos, e o gesto vira memória muscular logo. O arco de 2h a 6h ainda guarda o espírito do Expanding Fan original. Se os alvos de 30° parecerem pequenos, as famílias podem ocupar 40° cada sem perder a referência das horas.</div>
+  <p class="dv-next">Tente: "<a class="dv-oid" href="#7b">7b</a> com setores de 40°" · "ponteiro de <a class="dv-oid" href="#7c">7c</a> dentro de <a class="dv-oid" href="#7b">7b</a>" · "horas espelhadas (10h–6h) para canhotos"</p>
+</section>
+<section class="dv-turn" id="t6">
+  <div class="dv-thd"><a class="dv-tid" href="#t6">6</a><span class="dv-tname">Órbita de 5 — UI de <a class="dv-oid" href="#5a">5a</a> com o item extra de <a class="dv-oid" href="#5b">5b</a></span></div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="6a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#6a">6a</a><span><b style="color:#1a1a1a; font-weight:600;">Cinco famílias a 72°</b> — 1/2 ao meio-dia, depois no sentido horário 1/3 → 2/3 → 1/4 → 1/6. 1/3 e 2/3 ficam vizinhos, como um par.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="w" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial — cinco famílias</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="w" w="420" h="300" fam="4" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 expandida</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="w" w="420" h="300" fam="4" cell="2" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="w" w="420" h="300" fam="2" cell="0" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · 2/3 esquerda</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="w" w="420" h="263" mode="screen" fam="4" cell="2" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">5 · Preview 1/6</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="w" w="420" h="263" mode="screen" fam="2" cell="0" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">6 · Preview 2/3 esquerda</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Ø 202 pt, fixo</span><span>Setores de 72° (antes 90°)</span><span>Posições continuam espaciais no anel interno</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione, vá até a família no anel externo, volte para a posição e solte. Pivô ou Esc cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="w" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Tente: "versão compacta como <a class="dv-oid" href="#4b">4b</a>" · "frações no anel externo como <a class="dv-oid" href="#4c">4c</a>" · "lembrar a última família"</p>
+</section>
+<section class="dv-turn" id="t5">
+  <div class="dv-thd"><a class="dv-tid" href="#t5">5</a><span class="dv-tname">Como incluir 2/3 — a partir de <a class="dv-oid" href="#3a">3a</a> e <a class="dv-oid" href="#4b">4b</a></span></div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="5a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#5a">5a</a><span><b style="color:#1a1a1a; font-weight:600;">Terços em duas camadas</b> — base <a class="dv-oid" href="#3a">3a</a>. Em 1/3, o anel interno vira duas faixas: terços perto do pivô, dois terços por fora. Mais longe do centro = janela maior.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;"><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="s" w="420" h="300" fam="1" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · 1/3 apontada — terços dentro, 2/3 fora</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="s" w="420" h="300" fam="1" cell="3" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 2/3 esquerda</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="s" w="420" h="300" fam="1" cell="2" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · 1/3 direita (faixa interna)</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="s" w="420" h="263" mode="screen" fam="1" cell="3" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview 2/3 esquerda</div></div></div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Sem família nova: 1/3 ganha 5 posições</span><span>Regra: faixa externa = mais espaço</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — aponte 1/3 (→), volte e escolha a faixa interna (1/3) ou externa (2/3).</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="s" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="5b">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#5b">5b</a><span><b style="color:#1a1a1a; font-weight:600;">Chip 2/3 na diagonal</b> — base <a class="dv-oid" href="#4b">4b</a>. Um quinto chip na diagonal entre 1/2 e 1/3, sem mexer nas quatro direções decoradas. Só duas posições: metade esquerda ou direita do disco.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;"><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="t" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial — cinco chips</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="t" w="420" h="300" fam="4" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 2/3 apontada</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="t" w="420" h="300" fam="4" cell="1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · 2/3 direita</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="t" w="420" h="263" mode="screen" fam="4" cell="1" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview 2/3 direita</div></div></div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Direções cardeais intactas</span><span>2/3 entre 1/2 e 1/3, onde faz sentido</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — o chip 2/3 fica na diagonal superior direita.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="t" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="5c">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#5c">5c</a><span><b style="color:#1a1a1a; font-weight:600;">Modificador ⌥</b> — base <a class="dv-oid" href="#4b">4b</a>. Nada muda na órbita; dentro de 1/3, segurar ⌥ transforma esquerda/direita em 2/3. Soltar volta. A dica aparece só em 1/3.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;"><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="u" w="420" h="300" fam="1" cell="0" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · 1/3 esquerda</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="u" w="420" h="300" fam="1" cell="0" alt="{{ true }}" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · Com ⌥: 2/3 esquerda</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="u" w="420" h="300" fam="1" cell="2" alt="{{ true }}" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Com ⌥: 2/3 direita</div></div><div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="u" w="420" h="263" mode="screen" fam="1" cell="0" alt="{{ true }}" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview 2/3 esquerda</div></div></div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Zero espaço extra</span><span>Menos descobrível — depende da dica</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — dentro de 1/3, segure ⌥ (Option) para trocar para 2/3.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="u" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin: 24px 0 0; max-width: 900px; font-size: 13px; line-height: 1.6; color: rgba(0,0,0,0.72); text-wrap: pretty;">Recomendo <a class="dv-oid" href="#5a">5a</a>: o 2/3 mora junto do 1/3, na mesma direção e do mesmo lado, e a regra "mais longe = maior" se aprende numa tentativa. <a class="dv-oid" href="#5b">5b</a> é o mais descobrível, mas quebra a simetria da órbita. <a class="dv-oid" href="#5c">5c</a> serve como atalho avançado sobre qualquer um dos dois.</div>
+  <p class="dv-next">Tente: "<a class="dv-oid" href="#5a">5a</a> aplicado à <a class="dv-oid" href="#4b">4b</a>" · "duas camadas também em 1/2" · "<a class="dv-oid" href="#5a">5a</a> + ⌥ de <a class="dv-oid" href="#5c">5c</a>"</p>
+</section>
+<section class="dv-turn" id="t4">
+  <div class="dv-thd"><a class="dv-tid" href="#t4">4</a><span class="dv-tname">Variações da órbita <a class="dv-oid" href="#3a">3a</a> — 1/2 ↑ · 1/3 → · 1/4 ↓ · 1/6 ←</span></div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="4a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#4a">4a</a><span><b style="color:#1a1a1a; font-weight:600;">Órbita que cresce</b> — famílias no anel interno; ao apontar uma, a órbita externa se abre com as posições. O gesto só vai para fora, sem voltar.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="q" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="q" w="420" h="300" fam="3" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 apontada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="q" w="420" h="300" fam="3" cell="2" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="q" w="420" h="263" mode="screen" fam="3" cell="2" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Repouso Ø 116 pt → aberto Ø 204 pt</span><span>Gesto: família → continuar para fora → soltar</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione, aponte a família, escolha a posição e solte. Pivô ou Esc cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="q" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="4b">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#4b">4b</a><span><b style="color:#1a1a1a; font-weight:600;">Órbita compacta</b> — famílias como chips sobre um trilho fino; posições preenchem o disco interno.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="p" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="p" w="420" h="300" fam="3" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 apontada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="p" w="420" h="300" fam="3" cell="2" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="p" w="420" h="263" mode="screen" fam="3" cell="2" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Ø 168 pt, fixo</span><span>Gesto: sair até o chip → voltar ao disco → soltar</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione, aponte a família, escolha a posição e solte. Pivô ou Esc cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="p" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="4c">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#4c">4c</a><span><b style="color:#1a1a1a; font-weight:600;">Órbita com frações</b> — como <a class="dv-oid" href="#3a">3a</a>, mas o anel externo usa rótulos 1/2…1/6 e fica mais fino; glyphs só nas posições.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="r" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="r" w="420" h="300" fam="3" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 apontada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="r" w="420" h="300" fam="3" cell="2" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="r" w="420" h="263" mode="screen" fam="3" cell="2" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Ø 184 pt, fixo</span><span>Gesto: sair até a família → voltar → soltar</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione, aponte a família, escolha a posição e solte. Pivô ou Esc cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="r" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Tente: "<a class="dv-oid" href="#4a">4a</a> com chips de <a class="dv-oid" href="#4b">4b</a>" · "<a class="dv-oid" href="#4c">4c</a> menor" · "lembrar a última família ao abrir"</p>
+</section>
+<section class="dv-turn" id="t3">
+  <div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">Órbita — <a class="dv-oid" href="#2b">2b</a> reorganizado em anel completo</span></div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="3a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#3a">3a</a><span><b style="color:#1a1a1a; font-weight:600;">Órbita</b> — famílias no anel externo (1/2 ↑, 1/3 →, 1/4 ↓, 1/6 ←). A família apontada preenche o anel interno com suas posições, cada uma na direção em que a janela vai parar.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="o" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial — órbita vazia, marca no pivô</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="o" w="420" h="300" fam="3" cell="-1" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 apontada — posições ocupam a órbita interna</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="o" w="420" h="300" fam="3" cell="2" armed="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Volta para dentro: célula superior direita</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="o" w="420" h="263" mode="screen" fam="3" cell="2" armed="{{ true }}" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Ø 202 pt, fixo — não cresce ao expandir</span><span>Gesto: sair até a família → voltar ao anel interno → soltar</span><span>Perto da borda, a órbita desliza para dentro da tela</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione, vá até uma família no anel externo, volte para a posição no anel interno e solte. Pivô ou Esc cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="o" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Tente: "anel interno já mostrando 1/2 por padrão" · "famílias nas diagonais" · "órbita menor, Ø 170 pt"</p>
+</section>
+<section class="dv-turn" id="t2">
+  <div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Variações de <a class="dv-oid" href="#1b">1b</a> com a marca <a class="dv-oid" href="#1f">1f</a></span></div>
+  <div style="max-width: 1856px; margin: 0 0 24px; background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 20px 24px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
+    <dc-import name="Mark" variant="grid" size="96" tone="icon" hint-size="96px,96px"></dc-import>
+    <dc-import name="Mark" variant="grid" size="96" tone="icon-dark" hint-size="96px,96px"></dc-import>
+    <div style="display: flex; align-items: center; gap: 12px;"><dc-import name="Mark" variant="grid" size="36" tone="light" hint-size="36px,36px"></dc-import><div style="font-size: 34px; font-weight: 700; letter-spacing: -0.03em; color: #1C1C1E;">Orbitile</div></div>
+    <div style="height: 24px; padding: 0 10px; border-radius: 6px; background: #1E1E21; display: flex; align-items: center; gap: 12px; font-size: 13px; color: #fff;"><dc-import name="Mark" variant="grid" size="16" tone="mono-dark" hint-size="16px,16px"></dc-import><span>Wed 10:42</span></div>
+    <div style="flex: 1; min-width: 260px; font-size: 13px; line-height: 1.55; color: rgba(0,0,0,0.66); text-wrap: pretty;">A geometria de <a class="dv-oid" href="#1f">1f</a> — cantos externos mais redondos que os internos — passa para glyphs, painel e pivô. O pivô em repouso mostra a marca; vira × só quando o cursor volta a ele.</div>
+  </div>
+  <div class="dv-opts">
+    <div class="dv-opt" id="2a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#2a">2a</a><span><b style="color:#1a1a1a; font-weight:600;">Grid da marca</b> — <a class="dv-oid" href="#1b">1b</a> com glyphs e células no desenho de 1f; lâmina ativa clareia, azul só no destino.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="d" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial — pivô mostra a marca</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="d" w="420" h="300" fam="3" cell="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 expandida</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="d" w="420" h="300" fam="3" cell="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="d" w="420" h="263" mode="screen" fam="3" cell="2" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione sobre a janela, arraste, solte. Voltar ao pivô mostra × (cancelar).</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="d" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="2b">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#2b">2b</a><span><b style="color:#1a1a1a; font-weight:600;">Filete azul</b> — lâmina ativa ganha um filete azul na borda externa — confirma a família sem pintar a lâmina inteira.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="e" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial — pivô mostra a marca</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="e" w="420" h="300" fam="3" cell="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 expandida</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="e" w="420" h="300" fam="3" cell="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="e" w="420" h="263" mode="screen" fam="3" cell="2" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="e" w="420" h="300" fam="3" cell="2" flipX="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">5 · Perto da borda direita — o leque espelha para a esquerda</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="e" w="420" h="300" fam="0" cell="1" flipY="{{ true }}" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">6 · Perto do topo — o leque abre para baixo</div></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — teste perto das bordas: o leque espelha para caber na tela. Voltar ao pivô mostra × (cancelar).</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="e" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+    <div class="dv-opt" id="2c">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#2c">2c</a><span><b style="color:#1a1a1a; font-weight:600;">Painel acoplado</b> — o grid encosta na ponta da lâmina e herda o mesmo tom: lâmina + painel lidos como uma peça só.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="f" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial — pivô mostra a marca</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="f" w="420" h="300" fam="3" cell="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 expandida</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="f" w="420" h="300" fam="3" cell="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="f" w="420" h="263" mode="screen" fam="3" cell="2" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino</div></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione sobre a janela, arraste, solte. Voltar ao pivô mostra × (cancelar).</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="f" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Tente: "<a class="dv-oid" href="#2b">2b</a> com o painel acoplado de <a class="dv-oid" href="#2c">2c</a>" · "pivô sem marca em <a class="dv-oid" href="#2a">2a</a>" · "mostrar <a class="dv-oid" href="#2c">2c</a> em tela clara"</p>
+</section>
+<section class="dv-turn" id="t1">
+  <div style="max-width: 900px; display: flex; flex-direction: column; gap: 10px; margin: 0 0 32px;">
+    <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.02em;">Orbitile — interação e identidade do MVP</div>
+    <div style="font-size: 14px; line-height: 1.55; color: rgba(0,0,0,0.66); text-wrap: pretty;">Três refinamentos do <b>Expanding Fan</b> com a mesma mecânica: pivô de cancelamento no cursor, quatro lâminas fixas num quarto de círculo (1/2 → 1/6, de cima para a direita), a lâmina apontada estende e o grid de posições abre na ponta. Close-ups em tamanho real (1 pt = 1 px). Material Liquid Glass contido: lâminas opacas graphite, painel de grid translúcido, azul só no alvo. Microcopy em inglês.</div>
+  </div>
+
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Expanding Fan — três variações visuais</span></div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="1a">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#1a">1a</a><span><b style="color:#1a1a1a; font-weight:600;">Lâminas com frações</b> — o mais próximo da referência, com geometria e gaps regulares. Lâmina ativa vira azul.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="a" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial — quatro famílias</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="a" w="420" h="300" fam="3" cell="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 expandida</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="a" w="420" h="300" fam="3" cell="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="a" mode="screen" w="420" h="263" fam="3" cell="2" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino (tela inteira, escala real)</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Repouso ≈ 111 × 111 pt</span><span>1/6 aberto ≈ 252 × 111 pt</span><span>Rótulo: fração</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione sobre a janela (botão do meio ou clique), arraste, solte. Esc ou pivô cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="a" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1b">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#1b">1b</a><span><b style="color:#1a1a1a; font-weight:600;">Lâminas com glyphs</b> — sem texto: cada lâmina mostra o próprio layout. Azul reservado ao destino.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="b" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial — quatro famílias</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="b" w="420" h="300" fam="3" cell="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 expandida</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="b" w="420" h="300" fam="3" cell="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="b" mode="screen" w="420" h="263" fam="3" cell="2" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino (tela inteira, escala real)</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Repouso ≈ 95 × 95 pt</span><span>1/6 aberto ≈ 235 × 95 pt</span><span>Rótulo: glyph de layout</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione sobre a janela (botão do meio ou clique), arraste, solte. Esc ou pivô cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="b" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1c">
+      <div class="dv-olabel" style="max-width: 900px;"><a class="dv-oid" href="#1c">1c</a><span><b style="color:#1a1a1a; font-weight:600;">Arco compacto</b> — segmentos soltos do pivô formam um quarto de anel; menor footprint, painel menor.</span></div>
+      <div class="dv-card" style="width: 900px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 420px 420px; gap: 14px 20px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="c" w="420" h="300" fam="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">1 · Inicial — quatro famílias</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="c" w="420" h="300" fam="3" cell="-1" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">2 · 1/6 expandida</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 300px;"><dc-import name="Fan" variant="c" w="420" h="300" fam="3" cell="2" hint-size="420px,300px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">3 · Célula selecionada</div></div>
+          <div style="display: flex; flex-direction: column; gap: 7px;"><div style="border-radius: 8px; overflow: hidden; width: 420px; height: 263px;"><dc-import name="Fan" variant="c" mode="screen" w="420" h="263" fam="3" cell="2" hint-size="420px,263px"></dc-import></div><div style="font-size: 11px; font-weight: 500; color: rgba(0,0,0,0.55);">4 · Preview no destino (tela inteira, escala real)</div></div>
+        </div>
+        <div style="display: flex; gap: 24px; font-size: 12px; color: rgba(0,0,0,0.6); border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px;"><span>Repouso ≈ 91 × 91 pt</span><span>1/6 aberto ≈ 210 × 91 pt</span><span>Rótulo: fração pequena</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 12px; font-weight: 600;">Demo — pressione sobre a janela (botão do meio ou clique), arraste, solte. Esc ou pivô cancelam.</div>
+          <div style="border-radius: 8px; overflow: hidden; width: 860px; height: 538px;"><dc-import name="Fan" variant="c" mode="screen" w="860" h="538" interactive="{{ true }}" fanScale="1" hint-size="860px,538px"></dc-import></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin: 28px 0 0; max-width: 900px; background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px;">
+    <div style="font-size: 18px; font-weight: 700; letter-spacing: -0.01em;">Recomendação: <a class="dv-oid" href="#1b">1b</a>, com o pivô de <a class="dv-oid" href="#1a">1a</a></div>
+    <div style="display: grid; grid-template-columns: 160px repeat(3, 1fr); font-size: 13px; border-top: 1px solid rgba(0,0,0,0.08);">
+      <div style="padding: 8px 0; color: rgba(0,0,0,0.5);"></div><div style="padding: 8px 0; font-weight: 600;">1a</div><div style="padding: 8px 0; font-weight: 600;">1b</div><div style="padding: 8px 0; font-weight: 600;">1c</div>
+      <div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06);">Velocidade</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●○</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●●</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●●</div>
+      <div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06);">Clareza</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●○</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●●</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●○○</div>
+      <div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06);">Tamanho compacto</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●○○</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●○</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●●</div>
+      <div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06);">Muscle memory</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●○</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●●</div><div style="padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.06); letter-spacing: 2px;">●●○</div>
+    </div>
+    <div style="font-size: 13px; line-height: 1.6; color: rgba(0,0,0,0.72); text-wrap: pretty; display: flex; flex-direction: column; gap: 8px;">
+      <div>Em <a class="dv-oid" href="#1b">1b</a> a lâmina já desenha o layout, então reconhecer a família não exige ler; o grid na ponta repete o mesmo desenho em escala maior — lâmina e painel falam a mesma língua. Com azul só no destino, o olho vai direto ao que será aplicado.</div>
+      <div>Muscle memory vem do ângulo fixo: 1/2 é sempre "para cima", 1/6 é sempre "para a direita". Isso vale para as três; <a class="dv-oid" href="#1b">1b</a> vence porque é a mais rápida de reconhecer nas primeiras semanas, quando a memória ainda não formou. <a class="dv-oid" href="#1c">1c</a> é a menor, mas seus segmentos estreitos pedem mais precisão e o rótulo pequeno lê pior.</div>
+      <div>Próximos ajustes sugeridos: espelhar o leque perto das bordas da tela; testar o painel abrindo já com a célula mais próxima do cursor pré-selecionada.</div>
+    </div>
+  </div>
+
+  <div class="dv-thd" style="margin-top: 48px;"><span class="dv-tname">Orbital Tiles — três refinamentos do símbolo</span></div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="1d">
+      <div class="dv-olabel" style="max-width: 560px;"><a class="dv-oid" href="#1d">1d</a><span><b style="color:#1a1a1a; font-weight:600;">Órbita de janelas</b> — tiles na vertical, proporção de janela com barra de título; o azul desce da órbita.</span></div>
+      <div class="dv-card" style="width: 560px; display: flex; flex-direction: column;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+          <div style="height: 220px; background: #F5F5F7; display: flex; align-items: center; justify-content: center;"><dc-import name="Mark" variant="orbit" size="128" tone="light" hint-size="128px,128px"></dc-import></div>
+          <div style="height: 220px; background: #1C1C1E; display: flex; align-items: center; justify-content: center;"><dc-import name="Mark" variant="orbit" size="128" tone="dark" hint-size="128px,128px"></dc-import></div>
+        </div>
+        <div style="padding: 22px; display: flex; align-items: flex-end; gap: 22px; background: #E4E4E7;">
+          <dc-import name="Mark" variant="orbit" size="128" tone="icon" hint-size="128px,128px"></dc-import>
+          <dc-import name="Mark" variant="orbit" size="128" tone="icon-dark" hint-size="128px,128px"></dc-import>
+          <dc-import name="Mark" variant="orbit" size="64" tone="icon" hint-size="64px,64px"></dc-import>
+          <dc-import name="Mark" variant="orbit" size="32" tone="icon" hint-size="32px,32px"></dc-import>
+        </div>
+        <div style="padding: 18px 22px; display: flex; align-items: center; gap: 18px; border-top: 1px solid rgba(0,0,0,0.06);">
+          <dc-import name="Mark" variant="orbit" size="32" tone="light" hint-size="32px,32px"></dc-import>
+          <dc-import name="Mark" variant="orbit" size="24" tone="light" hint-size="24px,24px"></dc-import>
+          <dc-import name="Mark" variant="orbit" size="16" tone="light" hint-size="16px,16px"></dc-import>
+          <div style="flex: 1;"></div>
+          <div style="height: 24px; padding: 0 10px; border-radius: 6px; background: #F2F2F4; border: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; gap: 12px; font-size: 13px; color: #1a1a1a;"><dc-import name="Mark" variant="orbit" size="16" tone="mono-light" hint-size="16px,16px"></dc-import><span>Wed 10:42</span></div>
+          <div style="height: 24px; padding: 0 10px; border-radius: 6px; background: #1E1E21; display: flex; align-items: center; gap: 12px; font-size: 13px; color: #fff;"><dc-import name="Mark" variant="orbit" size="16" tone="mono-dark" hint-size="16px,16px"></dc-import><span>Wed 10:42</span></div>
+        </div>
+        <div style="padding: 26px 22px; display: flex; align-items: center; gap: 14px; border-top: 1px solid rgba(0,0,0,0.06);">
+          <dc-import name="Mark" variant="orbit" size="44" tone="light" hint-size="44px,44px"></dc-import>
+          <div style="font-size: 40px; font-weight: 600; letter-spacing: -0.025em; color: #1C1C1E;">Orbitile</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1e">
+      <div class="dv-olabel" style="max-width: 560px;"><a class="dv-oid" href="#1e">1e</a><span><b style="color:#1a1a1a; font-weight:600;">Órbita tangencial</b> — geometria da referência, gaps e raios regulares; o azul gira e sai do anel.</span></div>
+      <div class="dv-card" style="width: 560px; display: flex; flex-direction: column;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+          <div style="height: 220px; background: #F5F5F7; display: flex; align-items: center; justify-content: center;"><dc-import name="Mark" variant="tan" size="128" tone="light" hint-size="128px,128px"></dc-import></div>
+          <div style="height: 220px; background: #1C1C1E; display: flex; align-items: center; justify-content: center;"><dc-import name="Mark" variant="tan" size="128" tone="dark" hint-size="128px,128px"></dc-import></div>
+        </div>
+        <div style="padding: 22px; display: flex; align-items: flex-end; gap: 22px; background: #E4E4E7;">
+          <dc-import name="Mark" variant="tan" size="128" tone="icon" hint-size="128px,128px"></dc-import>
+          <dc-import name="Mark" variant="tan" size="128" tone="icon-dark" hint-size="128px,128px"></dc-import>
+          <dc-import name="Mark" variant="tan" size="64" tone="icon" hint-size="64px,64px"></dc-import>
+          <dc-import name="Mark" variant="tan" size="32" tone="icon" hint-size="32px,32px"></dc-import>
+        </div>
+        <div style="padding: 18px 22px; display: flex; align-items: center; gap: 18px; border-top: 1px solid rgba(0,0,0,0.06);">
+          <dc-import name="Mark" variant="tan" size="32" tone="light" hint-size="32px,32px"></dc-import>
+          <dc-import name="Mark" variant="tan" size="24" tone="light" hint-size="24px,24px"></dc-import>
+          <dc-import name="Mark" variant="tan" size="16" tone="light" hint-size="16px,16px"></dc-import>
+          <div style="flex: 1;"></div>
+          <div style="height: 24px; padding: 0 10px; border-radius: 6px; background: #F2F2F4; border: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; gap: 12px; font-size: 13px; color: #1a1a1a;"><dc-import name="Mark" variant="tan" size="16" tone="mono-light" hint-size="16px,16px"></dc-import><span>Wed 10:42</span></div>
+          <div style="height: 24px; padding: 0 10px; border-radius: 6px; background: #1E1E21; display: flex; align-items: center; gap: 12px; font-size: 13px; color: #fff;"><dc-import name="Mark" variant="tan" size="16" tone="mono-dark" hint-size="16px,16px"></dc-import><span>Wed 10:42</span></div>
+        </div>
+        <div style="padding: 26px 22px; display: flex; align-items: center; gap: 14px; border-top: 1px solid rgba(0,0,0,0.06);">
+          <dc-import name="Mark" variant="tan" size="44" tone="light" hint-size="44px,44px"></dc-import>
+          <div style="font-size: 40px; font-weight: 500; letter-spacing: -0.02em; color: #1C1C1E;">Orbitile</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1f">
+      <div class="dv-olabel" style="max-width: 560px;"><a class="dv-oid" href="#1f">1f</a><span><b style="color:#1a1a1a; font-weight:600;">Órbita em grade</b> — o anel encaixado num grid 3×3: lê como layout de janelas, não como spinner.</span></div>
+      <div class="dv-card" style="width: 560px; display: flex; flex-direction: column;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+          <div style="height: 220px; background: #F5F5F7; display: flex; align-items: center; justify-content: center;"><dc-import name="Mark" variant="grid" size="120" tone="light" hint-size="120px,120px"></dc-import></div>
+          <div style="height: 220px; background: #1C1C1E; display: flex; align-items: center; justify-content: center;"><dc-import name="Mark" variant="grid" size="120" tone="dark" hint-size="120px,120px"></dc-import></div>
+        </div>
+        <div style="padding: 22px; display: flex; align-items: flex-end; gap: 22px; background: #E4E4E7;">
+          <dc-import name="Mark" variant="grid" size="128" tone="icon" hint-size="128px,128px"></dc-import>
+          <dc-import name="Mark" variant="grid" size="128" tone="icon-dark" hint-size="128px,128px"></dc-import>
+          <dc-import name="Mark" variant="grid" size="64" tone="icon" hint-size="64px,64px"></dc-import>
+          <dc-import name="Mark" variant="grid" size="32" tone="icon" hint-size="32px,32px"></dc-import>
+        </div>
+        <div style="padding: 18px 22px; display: flex; align-items: center; gap: 18px; border-top: 1px solid rgba(0,0,0,0.06);">
+          <dc-import name="Mark" variant="grid" size="32" tone="light" hint-size="32px,32px"></dc-import>
+          <dc-import name="Mark" variant="grid" size="24" tone="light" hint-size="24px,24px"></dc-import>
+          <dc-import name="Mark" variant="grid" size="16" tone="light" hint-size="16px,16px"></dc-import>
+          <div style="flex: 1;"></div>
+          <div style="height: 24px; padding: 0 10px; border-radius: 6px; background: #F2F2F4; border: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; gap: 12px; font-size: 13px; color: #1a1a1a;"><dc-import name="Mark" variant="grid" size="16" tone="mono-light" hint-size="16px,16px"></dc-import><span>Wed 10:42</span></div>
+          <div style="height: 24px; padding: 0 10px; border-radius: 6px; background: #1E1E21; display: flex; align-items: center; gap: 12px; font-size: 13px; color: #fff;"><dc-import name="Mark" variant="grid" size="16" tone="mono-dark" hint-size="16px,16px"></dc-import><span>Wed 10:42</span></div>
+        </div>
+        <div style="padding: 26px 22px; display: flex; align-items: center; gap: 14px; border-top: 1px solid rgba(0,0,0,0.06);">
+          <dc-import name="Mark" variant="grid" size="42" tone="light" hint-size="42px,42px"></dc-import>
+          <div style="font-size: 40px; font-weight: 700; letter-spacing: -0.03em; color: #1C1C1E;">Orbitile</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin: 20px 0 0; max-width: 900px; font-size: 13px; line-height: 1.6; color: rgba(0,0,0,0.72); text-wrap: pretty;">Menu bar: versão template monocromática — o tile "azul" vira o único sólido, os outros cinco ficam a 40%. Em 16 px, <a class="dv-oid" href="#1f">1f</a> é o mais legível; <a class="dv-oid" href="#1e">1e</a> é o mais fiel à referência, mas continua o mais próximo de um spinner em tamanho pequeno.</div>
+  <p class="dv-next">Tente: "<a class="dv-oid" href="#1b">1b</a> com a lâmina ativa azul de <a class="dv-oid" href="#1a">1a</a>" · "app icon de <a class="dv-oid" href="#1d">1d</a> com o grid de <a class="dv-oid" href="#1f">1f</a>" · "mostrar o leque espelhado na borda da tela"</p>
+</section>
+</x-dc>
+</body>
+</html>

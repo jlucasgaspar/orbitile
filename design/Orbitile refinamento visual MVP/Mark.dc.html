@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="{{ wrap }}"><sc-for list="{{ tiles }}" as="t" hint-placeholder-count="6"><div style="{{ t.style }}"></div></sc-for></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:160,&quot;height&quot;:160},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;orbit&quot;,&quot;tan&quot;,&quot;grid&quot;],&quot;default&quot;:&quot;grid&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:64,&quot;tsType&quot;:&quot;number&quot;},&quot;tone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;,&quot;mono-light&quot;,&quot;mono-dark&quot;,&quot;icon&quot;,&quot;icon-dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const TONES={
+  light:{t:'#3A3B41',b:'#007AFF'},
+  dark:{t:'#C9CACF',b:'#0A84FF'},
+  'mono-light':{t:'rgba(0,0,0,0.38)',b:'#000'},
+  'mono-dark':{t:'rgba(255,255,255,0.42)',b:'#fff'},
+  icon:{t:'#3A3B41',b:'#0A84FF',bg:'linear-gradient(180deg,#FDFDFD 0%,#E6E7EA 100%)',in:'inset 0 0 0 0.5px rgba(0,0,0,0.08)'},
+  'icon-dark':{t:'#CDCED3',b:'#0A84FF',bg:'linear-gradient(180deg,#3D3E43 0%,#1F2023 100%)',in:'inset 0 0.5px 0 rgba(255,255,255,0.2)'}
+};
+const D=Math.PI/180;
+function tilesFor(v,size){
+  const out=[];
+  if(v==='orbit'){
+    const W=28,H=20,rr=4.5;
+    [-90,-30,30,90,150,210].forEach((a,i)=>{
+      const blue=i===3,rad=blue?38.5:35.5;
+      const x=50+rad*Math.cos(a*D)-W/2,y=50+rad*Math.sin(a*D)-H/2;
+      if(size>=40){const bh=5.2,gp=1.8;out.push({x,y,w:W,h:bh,r:[rr,rr,1,1],blue});out.push({x,y:y+bh+gp,w:W,h:H-bh-gp,r:[1,1,rr,rr],blue});}
+      else out.push({x,y,w:W,h:H,r:[rr,rr,rr,rr],blue});
+    });
+    return out;
+  }
+  if(v==='tan'){
+    const W=31,H=19,rr=5;
+    [-90,-30,30,90,150,210].forEach((a,i)=>{
+      const blue=i===3,rad=blue?36:33;
+      out.push({x:50+rad*Math.cos(a*D)-W/2,y:50+rad*Math.sin(a*D)-H/2,w:W,h:H,r:[rr,rr,rr,rr],blue,rot:a+90+(blue?-9:0)});
+    });
+    return out;
+  }
+  const n=3,g=7,ro=16,ri=5,u=100/n,L=n-1;
+  [[0,0,1,0],[2,0,2,0],[2,1,2,1],[1,2,2,2],[0,2,0,2,1],[0,1,0,1]].forEach(([c0,r0,c1,r1,b])=>out.push({
+    x:c0*u+g/2,y:r0*u+g/2,w:(c1-c0+1)*u-g,h:(r1-r0+1)*u-g,blue:!!b,
+    r:[c0===0&&r0===0?ro:ri,c1===L&&r0===0?ro:ri,c1===L&&r1===L?ro:ri,c0===0&&r1===L?ro:ri]}));
+  return out;
+}
+class Component extends DCLogic {
+  renderVals(){
+    const v=this.props.variant||'grid',size=+this.props.size||64,tone=this.props.tone||'light';
+    const T=TONES[tone]||TONES.light,isIcon=!!T.bg;
+    const inner=isIcon?size*0.6:size,off=isIcon?(size-inner)/2:0,k=inner/100,snap=size<=32;
+    const tiles=tilesFor(v,inner).map(t=>{
+      let x0=off+t.x*k,y0=off+t.y*k,x1=off+(t.x+t.w)*k,y1=off+(t.y+t.h)*k;
+      if(snap&&!t.rot){x0=Math.round(x0);y0=Math.round(y0);x1=Math.round(x1);y1=Math.round(y1);}
+      return {style:{position:'absolute',left:x0,top:y0,width:Math.max(1,x1-x0),height:Math.max(1,y1-y0),
+        borderRadius:t.r.map(r=>Math.max(0.6,r*k).toFixed(2)+'px').join(' '),background:t.blue?T.b:T.t,
+        transform:t.rot!=null?'rotate('+t.rot+'deg)':'none',
+        boxShadow:isIcon&&size>=64?'inset 0 0.5px 0 rgba(255,255,255,0.35)':'none'}};
+    });
+    return {tiles,wrap:{position:'relative',width:size,height:size,flex:'none',borderRadius:isIcon?size*0.225:0,
+      background:T.bg||'transparent',boxShadow:isIcon?T.in+', 0 '+(size*0.03).toFixed(1)+'px '+(size*0.08).toFixed(1)+'px rgba(0,0,0,0.2)':'none'}};
+  }
+}
+</script>
+</body>
+</html>
