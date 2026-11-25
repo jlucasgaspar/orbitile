@@ -14,7 +14,12 @@ private let accent = Color(red: 10 / 255, green: 132 / 255, blue: 1)
 
 struct FanView: View {
     @ObservedObject var model: FanModel
-    @State private var opened = false
+    @State private var opened: Bool
+
+    init(model: FanModel, startOpened: Bool = false) {
+        self.model = model
+        _opened = State(initialValue: startOpened)
+    }
 
     var body: some View {
         ZStack(alignment: .topLeading) {
