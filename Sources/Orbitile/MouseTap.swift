@@ -20,6 +20,7 @@ final class MouseTap {
     ]
 
     private var tap: CFMachPort?
+    private var source: CFRunLoopSource?
     private var session: GestureSession?
     /// The button-up of a click that opened/closed a gesture must not reach other apps.
     private var swallowMiddleUp = false
@@ -52,9 +53,26 @@ final class MouseTap {
             eventsOfInterest: mask, callback: callback,
             userInfo: Unmanaged.passUnretained(self).toOpaque()) else { return false }
         self.tap = tap
-        CFRunLoopAddSource(CFRunLoopGetMain(), CFMachPortCreateRunLoopSource(nil, tap, 0), .commonModes)
+        let source = CFMachPortCreateRunLoopSource(nil, tap, 0)
+        self.source = source
+        CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes)
         CGEvent.tapEnable(tap: tap, enable: true)
         return true
+    }
+
+    /// Removes the tap (for example when Accessibility is revoked). `start()` can create it again.
+    func stop() {
+        if let s = session {
+            session = nil
+            s.finish(apply: false)
+        }
+        if let tap {
+            CGEvent.tapEnable(tap: tap, enable: false)
+            CFMachPortInvalidate(tap)
+        }
+        if let source { CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes) }
+        tap = nil
+        source = nil
     }
 
     /// Returns true when the event must not reach other apps.

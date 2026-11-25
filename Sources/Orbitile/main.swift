@@ -3,7 +3,7 @@ import OrbitileCore
 import ServiceManagement
 import SwiftUI
 
-/// What the app can do right now. Anything but `.active` shows a hint in the menu and keeps polling.
+/// What the app can do right now. Anything but `.active` shows a hint in the menu.
 enum Readiness {
     case active, needsAccessibility, needsInputMonitoring
 
@@ -71,10 +71,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     /// Starts the event tap as soon as the permissions allow it, without a relaunch.
     private func refreshReadiness() {
-        if tap.isRunning {
-            readiness = .active
-        } else if !AXIsProcessTrusted() {
+        if !AXIsProcessTrusted() {
+            // Also covers a grant revoked while running: drop the tap so nothing is swallowed.
+            tap.stop()
             readiness = .needsAccessibility
+        } else if tap.isRunning {
+            readiness = .active
         } else {
             readiness = tap.start() ? .active : .needsInputMonitoring
         }
@@ -82,11 +84,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusItem?.button?.toolTip = statusText
         applyReadinessToMenu()
 
-        if readiness == .active {
-            poll?.invalidate()
-            poll = nil
-        } else if poll == nil {
-            poll = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { [weak self] _ in
+        // Always polling: it catches both a grant arriving and one being revoked.
+        if poll == nil {
+            poll = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
                 MainActor.assumeIsolated { self?.refreshReadiness() }
             }
         }

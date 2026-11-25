@@ -38,9 +38,9 @@ Refinado a partir do código do design. Conferir lado a lado com o mockup:
 
 ## 2. Corrigir os testes
 
-- [ ] [LayoutTests.swift](Tests/OrbitileCoreTests/LayoutTests.swift) não compila: tem `width: 720 == height: 438` e `x: 119 == y: 119` no lugar de vírgulas, e `#expect(r, CGRect(...))` com dois argumentos. Trocar por `#expect(r == CGRect(...))`.
-- [ ] Portar para o Swift Testing os checks novos que hoje só existem em [OrbitileChecks](Sources/OrbitileChecks/main.swift): drag, span, `select(family:)`, `targetRect(from:to:)` e `Easing`.
-- [ ] Rodar `swift test` e `swift run OrbitileChecks` sem falhas.
+- [x] [LayoutTests.swift](Tests/OrbitileCoreTests/LayoutTests.swift) consertado e o target de teste adicionado ao `Package.swift` (antes não existia).
+- [x] Checks novos portados para o Swift Testing: drag, span, `select(family:)`, `targetRect(from:to:)`, `FanState(family:)` e `Easing`.
+- [x] 19 testes passando com `scripts/test.sh` (com só as Command Line Tools, o `swift test` puro não acha o framework `Testing`; o script passa os caminhos). `swift run OrbitileChecks` sem falhas.
 
 ## 3. Ícone na menu bar
 
@@ -58,7 +58,7 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 - [x] Verificar `AXIsProcessTrusted()` periodicamente e iniciar o `MouseTap` assim que for concedida, sem relançar.
 - [x] Tratar `tapCreate` falhando por falta de Input Monitoring com mensagem própria.
 - [ ] Reativar o tap quando o sistema desabilitar (já há tratamento para timeout, validar na prática).
-- [ ] Permissão revogada com o app rodando: hoje `tap.isRunning` continua verdadeiro e o menu segue mostrando "active". Checar `AXIsProcessTrusted()` a cada abertura do menu e ao abrir o overlay, e voltar a `needsAccessibility`.
+- [x] Permissão revogada com o app rodando: um timer de 2 s confere `AXIsProcessTrusted()`; se cair, o tap é removido (`MouseTap.stop()`), o overlay aberto fecha sem aplicar e o menu volta a "Accessibility access needed". Ao conceder de novo, o tap volta sozinho. Falta só você confirmar na prática (revogar o Orbitile em Accessibility com ele rodando).
 
 ## 5. Empacotar como .app
 
