@@ -1,0 +1,44 @@
+{
+  "configurations": [
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:orbitile}",
+      "name": "Debug OrbitileChecks",
+      "target": "OrbitileChecks",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug OrbitileChecks"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:orbitile}",
+      "name": "Release OrbitileChecks",
+      "target": "OrbitileChecks",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release OrbitileChecks"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:orbitile}",
+      "name": "Debug Orbitile",
+      "target": "Orbitile",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug Orbitile"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:orbitile}",
+      "name": "Release Orbitile",
+      "target": "Orbitile",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release Orbitile"
+    }
+  ]
+}
