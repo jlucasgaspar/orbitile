@@ -79,9 +79,9 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 
 - [x] Licença MIT (`LICENSE`) e URL do repositório no README.
 - [ ] Assinar com Developer ID e notarizar (`notarytool`) para abrir sem aviso do Gatekeeper.
-- [ ] Gerar `.zip` ou `.dmg` e publicar em GitHub Releases.
+- [x] `scripts/release.sh <versão>` gera o `.zip` (com `ditto`) e o `.sha256`; com `--publish` cria o release via `gh`. Falta publicar o primeiro (v0.1.0).
 - [ ] Opcional: Homebrew cask.
-- [ ] Atualizar a seção Install do [README.md](README.md) com o link do release.
+- [x] Seção Install do [README.md](README.md) aponta para a página de Releases.
 
 ## 9. Imagens do README
 

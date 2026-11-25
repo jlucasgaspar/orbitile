@@ -42,21 +42,32 @@ Hover a window, click the middle button, and a ring of four layouts opens around
 
 ## Install
 
-There is no packaged release yet, so build from source:
+### Download
+
+1. Get `Orbitile-x.y.z.zip` from the [Releases page](https://github.com/jlucasgaspar/orbitile/releases) and unzip it.
+2. Drag **Orbitile.app** to `/Applications` and open it.
+3. If macOS says it cannot verify the app (builds that are not notarized), right-click the app and choose **Open**, or run:
+
+   ```sh
+   xattr -dr com.apple.quarantine /Applications/Orbitile.app
+   ```
+
+4. Grant **Accessibility** access when asked: **System Settings → Privacy & Security → Accessibility**, then enable Orbitile. It starts working right away, no relaunch needed. macOS may also ask for **Input Monitoring**, used by the global event tap.
+
+A small grid icon appears in the menu bar. From there you can pause Orbitile, start it at login, or quit.
+
+### Build from source
 
 ```sh
 git clone https://github.com/jlucasgaspar/orbitile.git
 cd orbitile
-swift run -c release Orbitile
+scripts/build-app.sh      # creates dist/Orbitile.app
+open dist/Orbitile.app
 ```
 
-The first run asks for **Accessibility** access. Orbitile needs it to find the window under the cursor and to move it.
+Or run it straight from the terminal with `swift run -c release Orbitile`. In that case the Accessibility permission goes to the terminal app you launched it from.
 
-1. Open **System Settings → Privacy & Security → Accessibility**.
-2. Enable the terminal you ran it from (Terminal, iTerm, VS Code…), or the built binary in `.build/release/Orbitile`.
-3. Quit and run it again. macOS may also ask for **Input Monitoring**, used by the global event tap.
-
-A small grid icon appears in the menu bar. Use it to quit.
+Builds are ad-hoc signed, and macOS ties the Accessibility grant to the signature. After rebuilding, you may need to remove Orbitile from the Accessibility list and add it again.
 
 ## How to use
 
@@ -93,6 +104,7 @@ Releasing a drag outside the cells only clears the selection and keeps the fan o
 | `Sources/OrbitileChecks` | Assertions for the core. Run with `swift run OrbitileChecks` |
 | `design/` | The design project exported from Claude Design (reference only) |
 | `docs/images/` | Logo and images used by this README |
+| `scripts/` | `build-app.sh` (the `.app`), `release.sh` (zip, checksum, notarization), `make-icon.sh` (the `.icns`) |
 
 ## Roadmap
 
