@@ -35,15 +35,15 @@ public enum FanHit: Equatable, Sendable {
 
 /// Fan geometry in points, relative to the fan center (y grows down).
 public enum FanGeometry {
-    public static let discDiameter: CGFloat = 202
-    public static let ringInner: CGFloat = 65
-    public static let ringOuter: CGFloat = 97
-    public static let hitInner: CGFloat = 62
-    public static let hitOuter: CGFloat = 118
-    public static let gridRect = CGRect(x: -48, y: -30, width: 96, height: 58)
-    public static let gridGap: CGFloat = 2.5
+    public static let discDiameter: CGFloat = 322
+    public static let ringInner: CGFloat = 108
+    public static let ringOuter: CGFloat = 155
+    public static let hitInner: CGFloat = 105
+    public static let hitOuter: CGFloat = 186
+    public static let gridRect = CGRect(x: -75, y: -47, width: 150, height: 94)
+    public static let gridGap: CGFloat = 4
     /// Outer radius used to keep the whole fan on screen.
-    public static let extent: CGFloat = 119
+    public static let extent: CGFloat = 187
 
     public static func cellRect(_ family: LayoutFamily, index: Int) -> CGRect {
         let g = gridRect

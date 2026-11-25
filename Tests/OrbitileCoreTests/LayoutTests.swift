@@ -3,7 +3,7 @@ import CoreGraphics
 @testable import OrbitileCore
 
 @Suite struct LayoutTests {
-    private func onRing(_ degrees: Double, radius: Double = 80) -> CGPoint {
+    private func onRing(_ degrees: Double, radius: Double = Double(FanGeometry.ringInner + FanGeometry.ringOuter) / 2) -> CGPoint {
         CGPoint(x: radius * cos(degrees * .pi / 180), y: radius * sin(degrees * .pi / 180))
     }
 
@@ -52,7 +52,7 @@ import CoreGraphics
 
     @Test func clampKeepsFanOnScreen() {
         let c = FanGeometry.clampCenter(CGPoint(x: 5, y: 5), in: CGRect(x: 0, y: 0, width: 1000, height: 800))
-        #expect(c == CGPoint(x: 119, y: 119))
+        #expect(c == CGPoint(x: FanGeometry.extent, y: FanGeometry.extent))
     }
 }
 

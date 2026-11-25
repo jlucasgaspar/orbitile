@@ -7,7 +7,7 @@ func expect<T: Equatable>(_ a: T, _ b: T, _ name: String) {
     if a == b { print("ok   \(name)") } else { print("FAIL \(name): \(a) != \(b)"); failures += 1 }
 }
 
-func onRing(_ degrees: Double) -> CGPoint { CGPoint(x: 80 * cos(degrees * .pi / 180), y: 80 * sin(degrees * .pi / 180)) }
+func onRing(_ degrees: Double) -> CGPoint { CGPoint(x: 132 * cos(degrees * .pi / 180), y: 132 * sin(degrees * .pi / 180)) }
 for (i, f) in LayoutFamily.all.enumerated() {
     expect(FanGeometry.hit(onRing(f.angle), expanded: nil), .family(i), "ring angle \(f.angle) -> family \(f.id)")
 }
@@ -51,6 +51,6 @@ expect(Easing.cubicBezier(0.2, 0.8, 0.2, 1, 1), 1, "easing ends at 1")
 let area = CGRect(x: 0, y: 0, width: 1440, height: 876)
 expect(FanGeometry.targetRect(f4, cell: 0, in: area, inset: 0), CGRect(x: 0, y: 438, width: 720, height: 438), "cell 0 is top-left")
 expect(FanGeometry.targetRect(f4, cell: 3, in: area, inset: 0), CGRect(x: 720, y: 0, width: 720, height: 438), "cell 3 is bottom-right")
-expect(FanGeometry.clampCenter(CGPoint(x: 5, y: 5), in: CGRect(x: 0, y: 0, width: 1000, height: 800)), CGPoint(x: 119, y: 119), "fan slides to fit")
+expect(FanGeometry.clampCenter(CGPoint(x: 5, y: 5), in: CGRect(x: 0, y: 0, width: 1000, height: 800)), CGPoint(x: FanGeometry.extent, y: FanGeometry.extent), "fan slides to fit")
 
 exit(failures == 0 ? 0 : 1)

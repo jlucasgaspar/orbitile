@@ -64,10 +64,10 @@ private struct Fan: View {
                     .fill(on ? Color(red: 0x3E / 255, green: 0x3F / 255, blue: 0x45 / 255) : Color(red: 0x2A / 255, green: 0x2A / 255, blue: 0x2E / 255))
                     .frame(width: Self.bladeBox, height: Self.bladeBox)
                 if on {
-                    Blade(r0: 95.5, r1: FanGeometry.ringOuter, angle: family.angle, gap: 3).fill(accent).frame(width: Self.bladeBox, height: Self.bladeBox)
+                    Blade(r0: 153, r1: FanGeometry.ringOuter, angle: family.angle, gap: 3).fill(accent).frame(width: Self.bladeBox, height: Self.bladeBox)
                 }
                 Glyph(family: family, size: CGSize(width: 18, height: 12), color: .white.opacity(on ? 1 : 0.62))
-                    .offset(polar(81, family.angle))
+                    .offset(polar(132, family.angle))
             }
 
             if let family = state.family {
@@ -82,7 +82,7 @@ private struct Fan: View {
                 .animation(nil, value: state)
                 .font(.system(size: 10, weight: .medium))
                 .foregroundStyle(.white.opacity(0.45))
-                .offset(y: 43)
+                .offset(y: 69)
         }
         .animation(.easeOut(duration: 0.07), value: state.familyIndex)
     }
