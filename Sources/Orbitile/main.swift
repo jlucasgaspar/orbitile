@@ -36,6 +36,9 @@ enum Readiness {
 final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private let statusLine = NSMenuItem(title: "", action: nil, keyEquivalent: "")
     private let settingsItem = NSMenuItem(title: "", action: #selector(openSettings), keyEquivalent: "")
+    private static let enabledKey = "enabled"
+    private let enabledItem = NSMenuItem(title: "Enabled", action: #selector(toggleEnabled), keyEquivalent: "")
+    private let aboutItem = NSMenuItem(title: "About Orbitile", action: #selector(showAbout), keyEquivalent: "")
     private let loginItem = NSMenuItem(title: "Launch at Login", action: #selector(toggleLaunchAtLogin), keyEquivalent: "")
     private let tap = MouseTap()
     private var statusItem: NSStatusItem?
@@ -50,7 +53,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusLine.isEnabled = false
         settingsItem.target = self
         loginItem.target = self
-        [statusLine, settingsItem, .separator(), loginItem, .separator()].forEach(menu.addItem)
+        enabledItem.target = self
+        aboutItem.target = self
+        tap.isEnabled = UserDefaults.standard.object(forKey: Self.enabledKey) as? Bool ?? true
+        [statusLine, settingsItem, .separator(), enabledItem, loginItem, .separator(), aboutItem].forEach(menu.addItem)
         menu.addItem(withTitle: "Quit Orbitile", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         status.menu = menu
         statusItem = status
@@ -72,8 +78,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         } else {
             readiness = tap.start() ? .active : .needsInputMonitoring
         }
-        statusItem?.button?.appearsDisabled = readiness != .active
-        statusItem?.button?.toolTip = readiness.message
+        statusItem?.button?.appearsDisabled = readiness != .active || !tap.isEnabled
+        statusItem?.button?.toolTip = statusText
         applyReadinessToMenu()
 
         if readiness == .active {
@@ -87,9 +93,35 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     private func applyReadinessToMenu() {
-        statusLine.title = readiness.message
+        statusLine.title = statusText
+        enabledItem.state = tap.isEnabled ? .on : .off
         settingsItem.title = readiness.settingsTitle ?? ""
         settingsItem.isHidden = readiness == .active
+    }
+
+    private var statusText: String {
+        readiness == .active && !tap.isEnabled ? "Orbitile is paused" : readiness.message
+    }
+
+    @objc private func toggleEnabled() {
+        tap.isEnabled.toggle()
+        UserDefaults.standard.set(tap.isEnabled, forKey: Self.enabledKey)
+        refreshReadiness()
+    }
+
+    @objc private func showAbout() {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "dev"
+        let credits = NSAttributedString(
+            string: "Tile windows with the middle mouse button.\nClick to open, pick a layout, click or drag across cells.",
+            attributes: [.font: NSFont.systemFont(ofSize: 11), .foregroundColor: NSColor.secondaryLabelColor])
+        NSApp.activate(ignoringOtherApps: true)
+        NSApp.orderFrontStandardAboutPanel(options: [
+            .applicationName: "Orbitile",
+            .applicationVersion: version,
+            .version: "",
+            .credits: credits,
+        ])
     }
 
     @objc private func openSettings() {

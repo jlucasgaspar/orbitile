@@ -41,7 +41,7 @@ Hoje usa o símbolo `square.grid.2x2` ([main.swift](Sources/Orbitile/main.swift)
 
 - [x] Gerar a marca como template image monocromática a partir de [logo.svg](docs/images/logo.svg): tile ativo sólido, os outros a 40% (regra do design).
 - [x] Incluir variantes 1x/2x e marcar como `isTemplate` para funcionar em menu bar clara e escura.
-- [x] Menu com Launch at Login (`SMAppService`, só funciona no `.app`) e Quit. Falta: Enable/Disable e About.
+- [x] Menu com Launch at Login (`SMAppService`, só funciona no `.app`) e Quit. Enable/Disable (guardado em `UserDefaults`) e About também estão no menu.
 
 ## 4. Permissões sem relançar
 
@@ -71,7 +71,7 @@ Hoje, sem Accessibility o app só imprime no stderr e não faz nada até ser rel
 ## 7. Preferências
 
 - [x] Launch at Login via `SMAppService.mainApp`.
-- [ ] Ligar/desligar o app pela menu bar.
+- [x] Ligar/desligar o app pela menu bar.
 - [ ] Margem entre janelas (hoje fixa em 6 pt, parâmetro `inset`).
 - [ ] Escolher o botão de abertura.
 

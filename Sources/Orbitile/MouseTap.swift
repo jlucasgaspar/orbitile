@@ -27,6 +27,15 @@ final class MouseTap {
 
     var isRunning: Bool { tap != nil }
 
+    /// When off, every event passes through untouched and an open overlay closes without applying.
+    var isEnabled = true {
+        didSet {
+            guard !isEnabled, let s = session else { return }
+            session = nil
+            s.finish(apply: false)
+        }
+    }
+
     func start() -> Bool {
         if isRunning { return true }
         let cid = CGSMainConnectionID()
@@ -50,10 +59,13 @@ final class MouseTap {
 
     /// Returns true when the event must not reach other apps.
     private func handle(_ type: CGEventType, _ event: CGEvent) -> Bool {
-        switch type {
-        case .tapDisabledByTimeout, .tapDisabledByUserInput:
+        if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
             if let tap { CGEvent.tapEnable(tap: tap, enable: true) }
             return false
+        }
+        guard isEnabled else { return false }
+
+        switch type {
 
         case .otherMouseDown where isMiddle(event):
             // Second middle click confirms (or cancels when no cell is hovered).
